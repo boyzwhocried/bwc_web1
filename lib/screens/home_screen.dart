@@ -1,6 +1,8 @@
+import 'package:bwc_web1/provider/dark_mode_provider.dart';
 import 'package:bwc_web1/widgets/main_drawer.dart';
 import 'package:bwc_web1/utils/screen_dimensions.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -11,6 +13,7 @@ class HomeScreen extends StatelessWidget {
     // double screenWidth = getScreenWidth(context);
     // double screenHeight = getScreenHeight(context);
 
+    // bool isDark = true;
     return Padding(
       padding: EdgeInsets.symmetric(
         horizontal: deviceType == DeviceType.phone ? 0 : 70,
@@ -32,34 +35,49 @@ class HomeScreen extends StatelessWidget {
           actions: [
             if (deviceType != DeviceType.phone)
               Padding(
-                padding: const EdgeInsets.all(5.0),
-                child: TextButton(
-                  onPressed: () {},
-                  child: const Text(
-                    'explore',
-                    style: TextStyle(
-                      letterSpacing: 3.0,
-                      fontSize: 18,
+                padding: const EdgeInsets.all(3.0),
+                child: Row(
+                  children: [
+                    TextButton(
+                      onPressed: () {},
+                      child: const Text(
+                        'explore',
+                        style: TextStyle(
+                          letterSpacing: 3.0,
+                          fontSize: 18,
+                        ),
+                      ),
                     ),
-                  ),
-                ),
-              ),
-            if (deviceType != DeviceType.phone)
-              Padding(
-                padding: const EdgeInsets.all(5.0),
-                child: TextButton(
-                  onPressed: () {},
-                  child: const Text(
-                    'about',
-                    style: TextStyle(
-                      letterSpacing: 3.0,
-                      fontSize: 18,
+                    TextButton(
+                      onPressed: () {},
+                      child: const Text(
+                        'about',
+                        style: TextStyle(
+                          letterSpacing: 3.0,
+                          fontSize: 18,
+                        ),
+                      ),
                     ),
-                  ),
+                    Consumer<DarkModeProvider>(
+                      builder: (context, darkModeProvider, child) {
+                        return IconButton(
+                          onPressed: () {
+                            darkModeProvider.toggleDarkMode();
+                          },
+                          icon: Icon(
+                            darkModeProvider.isDarkMode
+                                ? Icons.dark_mode
+                                : Icons.light_mode,
+                          ),
+                        );
+                      },
+                    ),
+                  ],
                 ),
               ),
           ],
         ),
+        // body: ,
       ),
     );
   }
