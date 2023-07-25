@@ -6,7 +6,7 @@ class MainDrawer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Drawer(
-      child: Column(
+      child: Stack(
         children: [
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
@@ -26,32 +26,38 @@ class MainDrawer extends StatelessWidget {
               ],
             ),
           ),
-          const Spacer(),
-          SizedBox(
-            child: Column(
-              children: [
-                ListTile(
-                  onTap: () {},
-                  title: const Text(
-                    'explore',
-                    style: TextStyle(fontSize: 24),
-                    textAlign: TextAlign.right,
-                  ),
-                  contentPadding: const EdgeInsets.symmetric(horizontal: 30),
+          Column(
+            children: [
+              const Spacer(),
+              SizedBox(
+                child: Column(
+                  children: [
+                    ListTile(
+                      onTap: () {},
+                      title: const Text(
+                        'explore',
+                        style: TextStyle(fontSize: 24),
+                        textAlign: TextAlign.right,
+                      ),
+                      contentPadding:
+                          const EdgeInsets.symmetric(horizontal: 30),
+                    ),
+                    ListTile(
+                      onTap: () {},
+                      title: const Text(
+                        'about',
+                        style: TextStyle(fontSize: 24),
+                        textAlign: TextAlign.right,
+                      ),
+                      contentPadding:
+                          const EdgeInsets.symmetric(horizontal: 30),
+                    ),
+                  ],
                 ),
-                ListTile(
-                  onTap: () {},
-                  title: const Text(
-                    'about',
-                    style: TextStyle(fontSize: 24),
-                    textAlign: TextAlign.right,
-                  ),
-                  contentPadding: const EdgeInsets.symmetric(horizontal: 30),
-                ),
-              ],
-            ),
+              ),
+              const Spacer(),
+            ],
           ),
-          const Spacer(),
         ],
       ),
     );
