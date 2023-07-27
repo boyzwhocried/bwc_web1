@@ -10,20 +10,22 @@ enum SlideDirection {
   rightToLeft,
 }
 
-
 class AnimatedFadeInText extends StatefulWidget {
   final String text;
   final TextStyle? textStyle;
-  final Duration? duration; // Allow duration to be null (optional)
+  final Duration? duration;
   final SlideDirection? slideDirection;
   final Curve? curveType;
+  final Duration? delay; // Allow delay to be null (optional)
 
-  const AnimatedFadeInText({super.key, 
+  const AnimatedFadeInText({
+    super.key,
     required this.text,
     this.textStyle,
-    this.duration, // Make duration optional
+    this.duration,
     this.slideDirection,
     this.curveType,
+    this.delay, // Make delay optional
   });
 
   @override
@@ -41,12 +43,12 @@ class _AnimatedFadeInTextState extends State<AnimatedFadeInText>
     super.initState();
     _animationController = AnimationController(
       vsync: this,
-      duration: widget.duration ?? const Duration(milliseconds: 500), // Use default duration if not provided
+      duration: widget.duration ?? const Duration(milliseconds: 500),
     );
 
     _slideAnimation = _createSlideAnimation();
 
-    Timer(widget.duration ?? const Duration(milliseconds: 500), () {
+    Timer(widget.delay ?? const Duration(milliseconds: 0), () {
       setState(() {
         opacityLevel = 1.0;
         _animationController.forward();
@@ -67,8 +69,6 @@ class _AnimatedFadeInTextState extends State<AnimatedFadeInText>
       case SlideDirection.bottomToTop:
         return Tween<Offset>(
           begin: const Offset(0, 1),
-
-
           end: Offset.zero,
         ).animate(CurvedAnimation(
           parent: _animationController,
@@ -110,7 +110,7 @@ class _AnimatedFadeInTextState extends State<AnimatedFadeInText>
       position: _slideAnimation,
       child: AnimatedOpacity(
         opacity: opacityLevel,
-        duration: widget.duration ?? const Duration(milliseconds: 500), // Use default duration if not provided
+        duration: widget.duration ?? const Duration(milliseconds: 500),
         child: Text(
           widget.text,
           style: widget.textStyle ?? Theme.of(context).textTheme.bodyMedium,

@@ -6,12 +6,15 @@ class AnimatedFadeInIcon extends StatefulWidget {
   final IconData iconData; // The icon data that you want to display and fade in
   final Duration? duration; // Optional: The duration of the fade-in animation
   final Curve? curve; // Optional: The curve of the fade-in animation
+  final Duration?
+      delay; // Optional: The delay before starting the fade-in animation
 
   const AnimatedFadeInIcon({
     super.key,
     required this.iconData,
     this.duration,
     this.curve,
+    this.delay,
   });
 
   @override
@@ -24,8 +27,8 @@ class _AnimatedFadeInIconState extends State<AnimatedFadeInIcon> {
   @override
   void initState() {
     super.initState();
-    // After a short delay, set _isIconVisible to true to start the fade-in animation
-    Future.delayed(const Duration(milliseconds: 500), () {
+    // Apply the provided delay before starting the fade-in animation
+    Future.delayed(widget.delay ?? Duration.zero, () {
       setState(() {
         _isIconVisible = true;
       });

@@ -21,14 +21,16 @@ class MyApp extends StatelessWidget {
           title: 'boyzwhocried',
           theme: ThemeData(
             brightness: Brightness.light,
-            fontFamily: GoogleFonts.dmSans().fontFamily,
-            colorSchemeSeed: const Color.fromARGB(255, 58, 137, 183),
+            fontFamily: GoogleFonts.poppins().fontFamily,
+            // colorSchemeSeed: const Color.fromARGB(255, 58, 137, 183),
+            colorSchemeSeed: const Color.fromARGB(255, 215, 255, 195),
             useMaterial3: true,
           ),
           darkTheme: ThemeData(
             brightness: Brightness.dark,
-            fontFamily: GoogleFonts.dmSans().fontFamily,
-            colorSchemeSeed: const Color.fromARGB(255, 58, 137, 183),
+            fontFamily: GoogleFonts.poppins().fontFamily,
+            // colorSchemeSeed: const Color.fromARGB(255, 58, 137, 183),
+            colorSchemeSeed: const Color.fromARGB(255, 215, 255, 195),
             useMaterial3: true,
           ),
           themeMode:

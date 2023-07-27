@@ -12,21 +12,33 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     DeviceType deviceType = getDeviceType(context);
+    double screenWidth = getScreenWidth(context);
+    // double screenHeight = getScreenHeight(context);
 
     return Scaffold(
       endDrawer: const MainDrawer(),
       appBar: AppBar(
-        toolbarHeight: 70,
+        toolbarHeight:
+            deviceType != DeviceType.phone ? 70 + screenWidth / 80 : 70,
         backgroundColor:
             Theme.of(context).colorScheme.inversePrimary.withOpacity(0.1),
-        title: const AnimatedFadeInText(
-          text: 'boyzwhocried',
-          textStyle: TextStyle(
-            letterSpacing: 2.0,
-            fontWeight: FontWeight.bold,
+        title: Padding(
+          padding: EdgeInsets.only(
+              left: deviceType != DeviceType.phone
+                  ? (10 / 100) * screenWidth
+                  : 0),
+          child: AnimatedFadeInText(
+            text: 'boyzwhocried',
+            textStyle: TextStyle(
+              // letterSpacing: 2.0,
+              fontWeight: FontWeight.w600,
+              fontSize: 20 + screenWidth / 100,
+            ),
+            slideDirection: deviceType == DeviceType.phone
+                ? SlideDirection.topToBottom
+                : SlideDirection.leftToRight,
+            curveType: Curves.easeInOutCubic,
           ),
-          slideDirection: SlideDirection.topToBottom,
-          curveType: Curves.easeInOutCubic,
         ),
         centerTitle: deviceType == DeviceType.phone,
         actions: [
@@ -43,8 +55,9 @@ class HomeScreen extends StatelessWidget {
                         letterSpacing: 3.0,
                         fontSize: 18,
                       ),
-                      slideDirection: SlideDirection.rightToLeft,
+                      slideDirection: SlideDirection.topToBottom,
                       curveType: Curves.easeInOutCubic,
+                      delay: Duration(milliseconds: 200),
                     ),
                   ),
                   TextButton(
@@ -55,13 +68,19 @@ class HomeScreen extends StatelessWidget {
                         letterSpacing: 3.0,
                         fontSize: 18,
                       ),
-                      slideDirection: SlideDirection.rightToLeft,
+                      slideDirection: SlideDirection.topToBottom,
                       curveType: Curves.easeInOutCubic,
+                      delay: Duration(milliseconds: 400),
                     ),
                   ),
-                  Consumer<DarkModeProvider>(
-                    builder: (context, darkModeProvider, child) {
-                      return IconButton(
+                  Padding(
+                    padding: EdgeInsets.only(
+                      left: 3,
+                      right: (10 / 100) * screenWidth,
+                    ),
+                    child: Consumer<DarkModeProvider>(
+                      builder: (context, darkModeProvider, child) {
+                        return IconButton(
                           onPressed: () {
                             darkModeProvider.toggleDarkMode();
                           },
@@ -69,8 +88,12 @@ class HomeScreen extends StatelessWidget {
                             iconData: darkModeProvider.isDarkMode
                                 ? Icons.light_mode_outlined
                                 : Icons.dark_mode_outlined,
-                          ));
-                    },
+                            delay: const Duration(milliseconds: 500),
+                          ),
+                          iconSize: 36,
+                        );
+                      },
+                    ),
                   ),
                 ],
               ),
