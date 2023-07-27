@@ -100,7 +100,11 @@ class HomeScreen extends StatelessWidget {
             ),
         ],
       ),
-      // body:
+      body: Center(
+        child: Image.asset(
+          'assets/images/fixed.png',
+        ),
+      ),
     );
   }
 }
