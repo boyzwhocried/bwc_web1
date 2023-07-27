@@ -77,8 +77,8 @@ class MainDrawer extends StatelessWidget {
                           },
                           icon: Icon(
                             darkModeProvider.isDarkMode
-                                ? Icons.dark_mode
-                                : Icons.light_mode,
+                                ? Icons.light_mode_outlined
+                                : Icons.dark_mode_outlined,
                             size: 36,
                           ),
                         ),
