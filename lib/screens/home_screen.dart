@@ -1,6 +1,7 @@
 import 'package:bwc_web1/provider/dark_mode_provider.dart';
 import 'package:bwc_web1/utils/custom_animated_fade_in_icon.dart';
 import 'package:bwc_web1/utils/custom_animated_fade_in_text.dart';
+import 'package:bwc_web1/widgets/contents/introduction.dart';
 import 'package:bwc_web1/widgets/main_drawer.dart';
 import 'package:bwc_web1/utils/screen_dimensions.dart';
 import 'package:flutter/material.dart';
@@ -30,13 +31,13 @@ class HomeScreen extends StatelessWidget {
           child: AnimatedFadeInText(
             text: 'boyzwhocried',
             textStyle: TextStyle(
-              // letterSpacing: 2.0,
+              letterSpacing: 2.0,
               fontWeight: FontWeight.w600,
               fontSize: 20 + screenWidth / 100,
             ),
             slideDirection: deviceType == DeviceType.phone
-                ? SlideDirection.topToBottom
-                : SlideDirection.leftToRight,
+                ? TextSlideDirection.topToBottom
+                : TextSlideDirection.leftToRight,
             curveType: Curves.easeInOutCubic,
           ),
         ),
@@ -44,7 +45,9 @@ class HomeScreen extends StatelessWidget {
         actions: [
           if (deviceType != DeviceType.phone)
             Padding(
-              padding: const EdgeInsets.all(3.0),
+              padding: EdgeInsets.only(
+                right: (10 / 100) * screenWidth,
+              ),
               child: Row(
                 children: [
                   TextButton(
@@ -55,7 +58,7 @@ class HomeScreen extends StatelessWidget {
                         letterSpacing: 3.0,
                         fontSize: 18,
                       ),
-                      slideDirection: SlideDirection.topToBottom,
+                      slideDirection: TextSlideDirection.topToBottom,
                       curveType: Curves.easeInOutCubic,
                       delay: Duration(milliseconds: 200),
                     ),
@@ -68,43 +71,57 @@ class HomeScreen extends StatelessWidget {
                         letterSpacing: 3.0,
                         fontSize: 18,
                       ),
-                      slideDirection: SlideDirection.topToBottom,
+                      slideDirection: TextSlideDirection.topToBottom,
                       curveType: Curves.easeInOutCubic,
                       delay: Duration(milliseconds: 400),
                     ),
                   ),
-                  Padding(
-                    padding: EdgeInsets.only(
-                      left: 3,
-                      right: (10 / 100) * screenWidth,
-                    ),
-                    child: Consumer<DarkModeProvider>(
-                      builder: (context, darkModeProvider, child) {
-                        return IconButton(
-                          onPressed: () {
-                            darkModeProvider.toggleDarkMode();
-                          },
-                          icon: AnimatedFadeInIcon(
-                            iconData: darkModeProvider.isDarkMode
-                                ? Icons.light_mode_outlined
-                                : Icons.dark_mode_outlined,
-                            delay: const Duration(milliseconds: 500),
-                          ),
-                          iconSize: 36,
-                        );
-                      },
-                    ),
-                  ),
+                  // Padding(
+                  //   padding: EdgeInsets.only(
+                  //     right: (10 / 100) * screenWidth,
+                  //   ),
+                  // ),
                 ],
               ),
             ),
         ],
       ),
-      body: Center(
-        child: Image.asset(
-          'assets/images/fixed.png',
+      body: SingleChildScrollView(
+        padding: EdgeInsets.only(
+          left: (12 / 100) * screenWidth,
+          right: (12 / 100) * screenWidth,
+          top: (12 / 100) * screenWidth,
+        ),
+        child: const Column(
+          children: [
+            IntroductionSection(),
+          ],
         ),
       ),
+      floatingActionButton: Consumer<DarkModeProvider>(
+        builder: (context, darkModeProvider, child) {
+          return IconButton(
+            onPressed: () {
+              darkModeProvider.toggleDarkMode();
+            },
+            icon: AnimatedFadeInIcon(
+              iconData: darkModeProvider.isDarkMode
+                  ? Icons.light_mode_outlined
+                  : Icons.dark_mode_outlined,
+              delay: const Duration(milliseconds: 500),
+            ),
+            iconSize: 36,
+          );
+        },
+      ),
+
+      // AnimatedFadeInText(text: 'Hi, My name is Verrel Al Syoumi!')
+      // Expanded(
+      //   child: Image.asset(
+      //     'assets/images/fixed.png',
+      //     fit: BoxFit.cover,
+      //   ),
+      // ),
     );
   }
 }

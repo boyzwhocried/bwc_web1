@@ -1,6 +1,4 @@
-import 'package:bwc_web1/provider/dark_mode_provider.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 
 class MainDrawer extends StatelessWidget {
   const MainDrawer({super.key});
@@ -59,35 +57,6 @@ class MainDrawer extends StatelessWidget {
               ),
               const Spacer(),
             ],
-          ),
-          Consumer<DarkModeProvider>(
-            builder: (context, darkModeProvider, child) {
-              return Padding(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  children: [
-                    Column(
-                      mainAxisAlignment: MainAxisAlignment.end,
-                      children: [
-                        IconButton(
-                          onPressed: () {
-                            darkModeProvider.toggleDarkMode();
-                          },
-                          icon: Icon(
-                            darkModeProvider.isDarkMode
-                                ? Icons.light_mode_outlined
-                                : Icons.dark_mode_outlined,
-                            size: 36,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ],
-                ),
-              );
-            },
           ),
         ],
       ),

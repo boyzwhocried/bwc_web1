@@ -3,7 +3,7 @@
 import 'package:flutter/material.dart';
 import 'dart:async';
 
-enum SlideDirection {
+enum TextSlideDirection {
   topToBottom,
   bottomToTop,
   leftToRight,
@@ -14,7 +14,7 @@ class AnimatedFadeInText extends StatefulWidget {
   final String text;
   final TextStyle? textStyle;
   final Duration? duration;
-  final SlideDirection? slideDirection;
+  final TextSlideDirection? slideDirection;
   final Curve? curveType;
   final Duration? delay; // Allow delay to be null (optional)
 
@@ -58,7 +58,7 @@ class _AnimatedFadeInTextState extends State<AnimatedFadeInText>
 
   Animation<Offset> _createSlideAnimation() {
     switch (widget.slideDirection) {
-      case SlideDirection.topToBottom:
+      case TextSlideDirection.topToBottom:
         return Tween<Offset>(
           begin: const Offset(0, -1),
           end: Offset.zero,
@@ -66,7 +66,7 @@ class _AnimatedFadeInTextState extends State<AnimatedFadeInText>
           parent: _animationController,
           curve: widget.curveType ?? Curves.easeInOut,
         ));
-      case SlideDirection.bottomToTop:
+      case TextSlideDirection.bottomToTop:
         return Tween<Offset>(
           begin: const Offset(0, 1),
           end: Offset.zero,
@@ -74,7 +74,7 @@ class _AnimatedFadeInTextState extends State<AnimatedFadeInText>
           parent: _animationController,
           curve: widget.curveType ?? Curves.easeInOut,
         ));
-      case SlideDirection.leftToRight:
+      case TextSlideDirection.leftToRight:
         return Tween<Offset>(
           begin: const Offset(-1, 0),
           end: Offset.zero,
@@ -82,7 +82,7 @@ class _AnimatedFadeInTextState extends State<AnimatedFadeInText>
           parent: _animationController,
           curve: widget.curveType ?? Curves.easeInOut,
         ));
-      case SlideDirection.rightToLeft:
+      case TextSlideDirection.rightToLeft:
         return Tween<Offset>(
           begin: const Offset(1, 0),
           end: Offset.zero,
