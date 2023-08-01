@@ -54,6 +54,13 @@ class IntroductionSection extends StatelessWidget {
                       fontSize: 46 + getScreenWidth(context) / 100,
                     ),
                   ),
+                  TypewriterAnimatedText(
+                    'open\nto work',
+                    textStyle: TextStyle(
+                      fontWeight: FontWeight.w600,
+                      fontSize: (46 + getScreenWidth(context) / 100) / 3,
+                    ),
+                  ),
                 ],
               ),
             ],

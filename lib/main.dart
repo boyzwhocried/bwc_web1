@@ -1,5 +1,5 @@
 import 'package:bwc_web1/provider/dark_mode_provider.dart';
-import 'package:bwc_web1/screens/home_screen.dart';
+import 'package:bwc_web1/screens/home_page.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
@@ -37,7 +37,7 @@ class MyApp extends StatelessWidget {
               darkModeProvider.isDarkMode ? ThemeMode.dark : ThemeMode.light,
           home:
               // const BgSmooth(),
-              const HomeScreen(),
+              const HomePage(),
           debugShowCheckedModeBanner: false,
         );
       }),
