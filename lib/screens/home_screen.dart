@@ -1,6 +1,7 @@
 import 'package:bwc_web1/provider/dark_mode_provider.dart';
 import 'package:bwc_web1/utils/custom_animated_fade_in_icon.dart';
 import 'package:bwc_web1/utils/custom_animated_fade_in_text.dart';
+import 'package:bwc_web1/utils/smooth_gradient_background.dart';
 import 'package:bwc_web1/widgets/contents/introduction.dart';
 import 'package:bwc_web1/widgets/main_drawer.dart';
 import 'package:bwc_web1/utils/screen_dimensions.dart';
@@ -22,7 +23,7 @@ class HomeScreen extends StatelessWidget {
         toolbarHeight:
             deviceType != DeviceType.phone ? 70 + screenWidth / 80 : 70,
         backgroundColor:
-            Theme.of(context).colorScheme.inversePrimary.withOpacity(0.1),
+            Theme.of(context).colorScheme.inversePrimary.withOpacity(0.5),
         title: Padding(
           padding: EdgeInsets.only(
               left: deviceType != DeviceType.phone
@@ -33,7 +34,7 @@ class HomeScreen extends StatelessWidget {
             textStyle: TextStyle(
               letterSpacing: 2.0,
               fontWeight: FontWeight.w600,
-              fontSize: 20 + screenWidth / 100,
+              fontSize: 20 + (screenWidth / 100),
             ),
             slideDirection: deviceType == DeviceType.phone
                 ? TextSlideDirection.topToBottom
@@ -76,26 +77,28 @@ class HomeScreen extends StatelessWidget {
                       delay: Duration(milliseconds: 400),
                     ),
                   ),
-                  // Padding(
-                  //   padding: EdgeInsets.only(
-                  //     right: (10 / 100) * screenWidth,
-                  //   ),
-                  // ),
                 ],
               ),
             ),
         ],
       ),
-      body: SingleChildScrollView(
-        padding: EdgeInsets.only(
-          left: (12 / 100) * screenWidth,
-          right: (12 / 100) * screenWidth,
-          top: (12 / 100) * screenWidth,
-        ),
-        child: const Column(
-          children: [
-            IntroductionSection(),
-          ],
+      body: SmoothGradientBackground(
+        gradientDirectionType: GradientDirectionType.dynamic,
+        gradients: const [
+          Color.fromARGB(105, 255, 239, 195),
+          Color.fromARGB(105, 215, 255, 195),
+          Color.fromARGB(105, 195, 255, 255),
+          Color.fromARGB(105, 250, 195, 255),
+          Color.fromARGB(105, 255, 195, 195),
+          Color.fromARGB(105, 204, 195, 255),
+        ],
+        child: SingleChildScrollView(
+          padding: EdgeInsets.all((12 / 100) * screenWidth),
+          child: const Column(
+            children: [
+              IntroductionSection(),
+            ],
+          ),
         ),
       ),
       floatingActionButton: Consumer<DarkModeProvider>(
@@ -114,14 +117,6 @@ class HomeScreen extends StatelessWidget {
           );
         },
       ),
-
-      // AnimatedFadeInText(text: 'Hi, My name is Verrel Al Syoumi!')
-      // Expanded(
-      //   child: Image.asset(
-      //     'assets/images/fixed.png',
-      //     fit: BoxFit.cover,
-      //   ),
-      // ),
     );
   }
 }
