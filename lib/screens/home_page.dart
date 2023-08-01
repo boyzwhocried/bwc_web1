@@ -39,73 +39,6 @@ class _HomePageState extends State<HomePage>
     // double screenHeight = getScreenHeight(context);
 
     return Scaffold(
-      endDrawer: Drawer(
-        child: Stack(
-          children: [
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.end,
-                children: [
-                  IconButton(
-                    onPressed: () {
-                      Navigator.pop(context);
-                    },
-                    icon: const Icon(
-                      Icons.close,
-                      size: 36,
-                    ),
-                    padding: const EdgeInsets.all(7),
-                  ),
-                ],
-              ),
-            ),
-            Column(
-              children: [
-                const Spacer(),
-                SizedBox(
-                  child: Column(
-                    children: [
-                      ListTile(
-                        onTap: () {
-                          Navigator.pop(context);
-                          _tabController.animateTo(
-                              1); // Replace '0' with the index of the action you want to show
-                          setState(() {});
-                        },
-                        title: const Text(
-                          'explore',
-                          style: TextStyle(fontSize: 24),
-                          textAlign: TextAlign.right,
-                        ),
-                        contentPadding:
-                            const EdgeInsets.symmetric(horizontal: 30),
-                      ),
-                      ListTile(
-                        onTap: () {
-                          Navigator.pop(context);
-                          _tabController.animateTo(
-                              2); // Replace '1' with the index of the action you want to show
-                          setState(() {});
-                        },
-                        title: const Text(
-                          'about',
-                          style: TextStyle(fontSize: 24),
-                          textAlign: TextAlign.right,
-                        ),
-                        contentPadding:
-                            const EdgeInsets.symmetric(horizontal: 30),
-                      ),
-                    ],
-                  ),
-                ),
-                const Spacer(),
-              ],
-            ),
-          ],
-        ),
-      ),
-      // const MainDrawer(),
       appBar: AppBar(
         toolbarHeight:
             deviceType != DeviceType.phone ? 70 + screenWidth / 80 : 70,
@@ -184,15 +117,83 @@ class _HomePageState extends State<HomePage>
             ),
         ],
       ),
+      endDrawer: Drawer(
+        child: Stack(
+          children: [
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [
+                  IconButton(
+                    onPressed: () {
+                      Navigator.pop(context);
+                    },
+                    icon: const Icon(
+                      Icons.close,
+                      size: 36,
+                    ),
+                    padding: const EdgeInsets.all(7),
+                  ),
+                ],
+              ),
+            ),
+            Column(
+              children: [
+                const Spacer(),
+                SizedBox(
+                  child: Column(
+                    children: [
+                      ListTile(
+                        onTap: () {
+                          Navigator.pop(context);
+                          _tabController.animateTo(
+                              1); // Replace '0' with the index of the action you want to show
+                          setState(() {});
+                        },
+                        title: const Text(
+                          'explore',
+                          style: TextStyle(fontSize: 24),
+                          textAlign: TextAlign.right,
+                        ),
+                        contentPadding:
+                            const EdgeInsets.symmetric(horizontal: 30),
+                      ),
+                      ListTile(
+                        onTap: () {
+                          Navigator.pop(context);
+                          _tabController.animateTo(
+                              2); // Replace '1' with the index of the action you want to show
+                          setState(() {});
+                        },
+                        title: const Text(
+                          'about',
+                          style: TextStyle(fontSize: 24),
+                          textAlign: TextAlign.right,
+                        ),
+                        contentPadding:
+                            const EdgeInsets.symmetric(horizontal: 30),
+                      ),
+                    ],
+                  ),
+                ),
+                const Spacer(),
+              ],
+            ),
+          ],
+        ),
+      ),
+      // const MainDrawer(),
       body: SmoothGradientBackground(
         gradientDirectionType: GradientDirectionType.dynamic,
         gradients: const [
-          Color.fromARGB(75, 255, 239, 195),
-          Color.fromARGB(75, 215, 255, 195),
-          Color.fromARGB(75, 195, 255, 255),
-          Color.fromARGB(75, 250, 195, 255),
-          Color.fromARGB(75, 255, 195, 195),
-          Color.fromARGB(75, 204, 195, 255),
+          Color.fromARGB(50, 255, 195, 195),
+          Color.fromARGB(50, 251, 255, 195),
+          Color.fromARGB(50, 195, 255, 203),
+          Color.fromARGB(50, 195, 253, 255),
+          Color.fromARGB(50, 204, 195, 255),
+          Color.fromARGB(50, 255, 195, 225),
+          Color.fromARGB(50, 245, 195, 255),
         ],
         child: TabBarView(
           controller: _tabController,
