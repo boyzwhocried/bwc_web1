@@ -1,12 +1,17 @@
 import 'package:animated_text_kit/animated_text_kit.dart';
-import 'package:bwc_web1/utils/custom_animated_fade_in_text.dart';
 import 'package:bwc_web1/utils/custom_animated_fade_in_widget.dart';
+import 'package:bwc_web1/utils/on_hover_animated_text.dart';
 import 'package:bwc_web1/utils/screen_dimensions.dart';
 import 'package:flutter/material.dart';
 
-class IntroductionSection extends StatelessWidget {
+class IntroductionSection extends StatefulWidget {
   const IntroductionSection({super.key});
 
+  @override
+  State<IntroductionSection> createState() => _IntroductionSectionState();
+}
+
+class _IntroductionSectionState extends State<IntroductionSection> {
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -66,22 +71,80 @@ class IntroductionSection extends StatelessWidget {
             ],
           ),
         ),
-        AnimatedFadeInText(
-          textStyle: TextStyle(
-            fontSize: 9 + getScreenWidth(context) / 100,
-          ),
+        // AnimatedFadeInText(
+        //   textStyle: TextStyle(
+        //     fontSize: 9 + getScreenWidth(context) / 100,
+        //   ),
+        //   curveType: Curves.easeInOutCubic,
+        //   delay: const Duration(milliseconds: 1000),
+        //   text:
+        //       'Hey there! I\'m just a Computer Science student from Indonesia who enjoys learning by doing stuff. So, I made this website using Flutter, you know, to learn how to build a responsive website with only Flutter. No biggie, just trying things out!',
+        // ),
+        AnimatedFadeInWidget(
           curveType: Curves.easeInOutCubic,
-          delay: const Duration(milliseconds: 1000),
-          text:
-              'Hey there! I\'m just a Computer Science student from Indonesia who enjoys learning by doing stuff. So, I made this website using Flutter, you know, to learn how to build a responsive website with only Flutter. No biggie, just trying things out!',
-          // 'I am a Computer Science student based in Indonesia who like to learn things by doing it. This website was fully made with Flutter with intention of learning to build a responsive website with only Flutter.',
-          // child: Text(
-          //   'I am a Computer Science student who like to learn things by doing it. This website was fully made with Flutter with intention of learning to build a responsive website with only Flutter.',
-          //   textAlign: TextAlign.left,
-          //   style: TextStyle(
-          //     fontSize: 8 + getScreenWidth(context) / 100,
-          //   ),
-          // ),
+          startDelay: const Duration(milliseconds: 1000),
+          child: RichText(
+            text: TextSpan(
+              style: DefaultTextStyle.of(context)
+                  .style
+                  .copyWith(fontSize: 9 + getScreenWidth(context) / 100),
+              children: <TextSpan>[
+                const TextSpan(text: 'Hey there! I\'m just a '),
+                TextSpan(
+                  children: [
+                    WidgetSpan(
+                      child: OnHoverAnimatedText(
+                        text: 'Computer Science',
+                        fontStyle: DefaultTextStyle.of(context).style.copyWith(
+                            fontSize: 9 + getScreenWidth(context) / 100),
+                      ),
+                    ),
+                  ],
+                ),
+                const TextSpan(text: ' student from '),
+                TextSpan(
+                  children: [
+                    WidgetSpan(
+                      child: OnHoverAnimatedText(
+                        text: 'Indonesia ',
+                        fontStyle: DefaultTextStyle.of(context).style.copyWith(
+                            fontSize: 9 + getScreenWidth(context) / 100),
+                      ),
+                    ),
+                  ],
+                ),
+                const TextSpan(
+                    text:
+                        'who enjoys learning by doing stuff. So, I made this website using '),
+                TextSpan(
+                  children: [
+                    WidgetSpan(
+                      child: OnHoverAnimatedText(
+                        text: 'Flutter ',
+                        fontStyle: DefaultTextStyle.of(context).style.copyWith(
+                            fontSize: 9 + getScreenWidth(context) / 100),
+                      ),
+                    ),
+                  ],
+                ),
+                const TextSpan(
+                    text:
+                        ', you know, to learn how to build a responsive website with only '),
+                TextSpan(
+                  children: [
+                    WidgetSpan(
+                      child: OnHoverAnimatedText(
+                        text: 'Flutter. ',
+                        fontStyle: DefaultTextStyle.of(context).style.copyWith(
+                            fontSize: 9 + getScreenWidth(context) / 100),
+                      ),
+                    ),
+                  ],
+                ),
+                const TextSpan(text: 'No biggie, just trying things out!'),
+              ],
+            ),
+          ),
         ),
       ],
     );

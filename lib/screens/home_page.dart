@@ -1,4 +1,5 @@
 import 'package:bwc_web1/provider/dark_mode_provider.dart';
+import 'package:bwc_web1/utils/color_gradient.dart';
 import 'package:bwc_web1/utils/custom_animated_fade_in_icon.dart';
 import 'package:bwc_web1/utils/custom_animated_fade_in_text.dart';
 import 'package:bwc_web1/utils/smooth_gradient_background.dart';
@@ -186,15 +187,7 @@ class _HomePageState extends State<HomePage>
       // const MainDrawer(),
       body: SmoothGradientBackground(
         gradientDirectionType: GradientDirectionType.dynamic,
-        gradients: const [
-          Color.fromARGB(50, 255, 195, 195),
-          Color.fromARGB(50, 251, 255, 195),
-          Color.fromARGB(50, 195, 255, 203),
-          Color.fromARGB(50, 195, 253, 255),
-          Color.fromARGB(50, 204, 195, 255),
-          Color.fromARGB(50, 255, 195, 225),
-          Color.fromARGB(50, 245, 195, 255),
-        ],
+        gradients: Pastel7ColorfulA50.colorList,
         child: TabBarView(
           controller: _tabController,
           children: [
