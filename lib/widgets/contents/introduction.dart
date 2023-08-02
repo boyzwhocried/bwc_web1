@@ -1,8 +1,8 @@
 import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:bwc_web1/provider/dark_mode_provider.dart';
 import 'package:bwc_web1/utils/color_gradient.dart';
-import 'package:bwc_web1/utils/custom_animated_fade_in_widget.dart';
-import 'package:bwc_web1/utils/on_hover_animated_text.dart';
+import 'package:bwc_web1/widgets/custom/custom_animated_fade_in_widget.dart';
+import 'package:bwc_web1/widgets/custom/on_hover_animated_text.dart';
 import 'package:bwc_web1/utils/screen_dimensions.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';

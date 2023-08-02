@@ -1,8 +1,8 @@
 import 'package:bwc_web1/provider/dark_mode_provider.dart';
 import 'package:bwc_web1/utils/color_gradient.dart';
-import 'package:bwc_web1/utils/custom_animated_fade_in_icon.dart';
-import 'package:bwc_web1/utils/custom_animated_fade_in_text.dart';
-import 'package:bwc_web1/utils/smooth_gradient_background.dart';
+import 'package:bwc_web1/widgets/custom/custom_animated_fade_in_icon.dart';
+import 'package:bwc_web1/widgets/custom/custom_animated_fade_in_text.dart';
+import 'package:bwc_web1/widgets/custom/smooth_gradient_background.dart';
 import 'package:bwc_web1/widgets/contents/introduction.dart';
 import 'package:bwc_web1/utils/screen_dimensions.dart';
 import 'package:flutter/material.dart';
