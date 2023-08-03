@@ -1,29 +1,12 @@
 import 'package:flutter/material.dart';
 
-class MainDrawer extends StatefulWidget {
-  const MainDrawer({super.key});
+class SideDrawer extends StatelessWidget {
+  const SideDrawer({
+    super.key,
+    required this.updateCallback,
+  });
 
-  @override
-  State<MainDrawer> createState() => _MainDrawerState();
-}
-
-class _MainDrawerState extends State<MainDrawer>
-    with SingleTickerProviderStateMixin {
-  late TabController _tabController;
-
-  @override
-  void initState() {
-    super.initState();
-    _tabController = TabController(
-        length: 2,
-        vsync: this); // Replace '3' with the number of actions you have
-  }
-
-  @override
-  void dispose() {
-    _tabController.dispose();
-    super.dispose();
-  }
+  final Function(int) updateCallback;
 
   @override
   Widget build(BuildContext context) {
@@ -57,9 +40,7 @@ class _MainDrawerState extends State<MainDrawer>
                     ListTile(
                       onTap: () {
                         Navigator.pop(context);
-                        _tabController.animateTo(
-                            0); // Replace '0' with the index of the action you want to show
-                        setState(() {});
+                        updateCallback(1);
                       },
                       title: const Text(
                         'explore',
@@ -72,9 +53,7 @@ class _MainDrawerState extends State<MainDrawer>
                     ListTile(
                       onTap: () {
                         Navigator.pop(context);
-                        _tabController.animateTo(
-                            1); // Replace '1' with the index of the action you want to show
-                        setState(() {});
+                        updateCallback(2);
                       },
                       title: const Text(
                         'about',

@@ -1,5 +1,6 @@
 import 'package:bwc_web1/provider/dark_mode_provider.dart';
-import 'package:bwc_web1/screens/home_page.dart';
+// import 'package:bwc_web1/provider/page_state_provider.dart';
+import 'package:bwc_web1/screens/main_page.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
@@ -13,8 +14,11 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider(
-      create: (context) => DarkModeProvider(),
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (context) => DarkModeProvider()),
+        // ChangeNotifierProvider(create: (context) => PageStateProvider()),
+      ],
       child: Consumer<DarkModeProvider>(
           builder: (context, darkModeProvider, child) {
         return MaterialApp(
@@ -35,9 +39,9 @@ class MyApp extends StatelessWidget {
           ),
           themeMode:
               darkModeProvider.isDarkMode ? ThemeMode.dark : ThemeMode.light,
-          home:
-              // const BgSmooth(),
-              const HomePage(),
+          home: const MainPage(),
+          // const BgSmooth(),
+          // TestPageProvider(),
           debugShowCheckedModeBanner: false,
         );
       }),
