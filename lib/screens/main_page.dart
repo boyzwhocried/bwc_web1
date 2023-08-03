@@ -136,8 +136,8 @@ class _MainPageState extends State<MainPage>
               padding: EdgeInsets.all((12 / 100) * screenWidth),
               child: const IntroductionSection(),
             ),
-            const IntroductionSection(),
-            const IntroductionSection(),
+            const IntroductionSection(), // Explore page
+            const IntroductionSection(), // About page
           ],
         ),
       ),

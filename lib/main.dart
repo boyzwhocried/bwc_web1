@@ -1,5 +1,4 @@
 import 'package:bwc_web1/provider/dark_mode_provider.dart';
-// import 'package:bwc_web1/provider/page_state_provider.dart';
 import 'package:bwc_web1/screens/main_page.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -17,7 +16,6 @@ class MyApp extends StatelessWidget {
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (context) => DarkModeProvider()),
-        // ChangeNotifierProvider(create: (context) => PageStateProvider()),
       ],
       child: Consumer<DarkModeProvider>(
           builder: (context, darkModeProvider, child) {
