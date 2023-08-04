@@ -1,5 +1,8 @@
 import 'package:bwc_web1/provider/dark_mode_provider.dart';
+import 'package:bwc_web1/screens/about_page.dart';
+import 'package:bwc_web1/screens/front_page.dart';
 import 'package:bwc_web1/utils/color_gradient.dart';
+import 'package:bwc_web1/utils/responsive_fontsize.dart';
 import 'package:bwc_web1/widgets/contents/introduction.dart';
 import 'package:bwc_web1/widgets/custom/custom_animated_fade_in_text.dart';
 import 'package:bwc_web1/widgets/custom/smooth_gradient_background.dart';
@@ -66,10 +69,9 @@ class _MainPageState extends State<MainPage>
             child: AnimatedFadeInText(
               text: 'boyzwhocried',
               textStyle: TextStyle(
-                letterSpacing: 2.0,
-                fontWeight: FontWeight.w600,
-                fontSize: 20 + (screenWidth / 100),
-              ),
+                  letterSpacing: 2.0,
+                  fontWeight: FontWeight.w600,
+                  fontSize: responsiveFontSize(context, 20)),
               slideDirection: deviceType == DeviceType.phone
                   ? TextSlideDirection.topToBottom
                   : TextSlideDirection.leftToRight,
@@ -131,13 +133,10 @@ class _MainPageState extends State<MainPage>
         gradients: Pastel7ColorfulA50.colorList,
         child: TabBarView(
           controller: _tabController,
-          children: [
-            Padding(
-              padding: EdgeInsets.all((12 / 100) * screenWidth),
-              child: const IntroductionSection(),
-            ),
-            const IntroductionSection(), // Explore page
-            const IntroductionSection(), // About page
+          children: const [
+            FrontPage(),
+            IntroductionSection(), // Explore page
+            AboutPage(), // Aabout page
           ],
         ),
       ),

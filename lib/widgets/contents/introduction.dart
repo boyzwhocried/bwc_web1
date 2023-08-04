@@ -1,9 +1,9 @@
 import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:bwc_web1/provider/dark_mode_provider.dart';
 import 'package:bwc_web1/utils/color_gradient.dart';
+import 'package:bwc_web1/utils/responsive_fontsize.dart';
 import 'package:bwc_web1/widgets/custom/custom_animated_fade_in_widget.dart';
 import 'package:bwc_web1/widgets/custom/on_hover_animated_text.dart';
-import 'package:bwc_web1/utils/screen_dimensions.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -18,14 +18,14 @@ class IntroductionSection extends StatelessWidget {
       children: [
         AnimatedFadeInWidget(
           curveType: Curves.easeInOutCubic,
-          startDelay: const Duration(milliseconds: 700),
+          startDelay: const Duration(milliseconds: 200),
           child: Row(
             children: [
               Text(
                 'I am ',
                 style: TextStyle(
                   fontWeight: FontWeight.w600,
-                  fontSize: 46 + getScreenWidth(context) / 100,
+                  fontSize: responsiveFontSize(context, 46),
                 ),
               ),
               AnimatedTextKit(
@@ -35,35 +35,35 @@ class IntroductionSection extends StatelessWidget {
                     'boyz',
                     textStyle: TextStyle(
                       fontWeight: FontWeight.w600,
-                      fontSize: 46 + getScreenWidth(context) / 100,
+                      fontSize: responsiveFontSize(context, 46),
                     ),
                   ),
                   TypewriterAnimatedText(
                     'who',
                     textStyle: TextStyle(
                       fontWeight: FontWeight.w600,
-                      fontSize: 46 + getScreenWidth(context) / 100,
+                      fontSize: responsiveFontSize(context, 46),
                     ),
                   ),
                   TypewriterAnimatedText(
                     'cried',
                     textStyle: TextStyle(
                       fontWeight: FontWeight.w600,
-                      fontSize: 46 + getScreenWidth(context) / 100,
+                      fontSize: responsiveFontSize(context, 46),
                     ),
                   ),
                   TypewriterAnimatedText(
                     'verrel',
                     textStyle: TextStyle(
                       fontWeight: FontWeight.w600,
-                      fontSize: 46 + getScreenWidth(context) / 100,
+                      fontSize: responsiveFontSize(context, 46),
                     ),
                   ),
                   TypewriterAnimatedText(
                     'open\nto work',
                     textStyle: TextStyle(
                       fontWeight: FontWeight.w600,
-                      fontSize: (46 + getScreenWidth(context) / 100) / 3,
+                      fontSize: responsiveFontSize(context, 46) / 3,
                     ),
                   ),
                 ],
@@ -73,12 +73,12 @@ class IntroductionSection extends StatelessWidget {
         ),
         AnimatedFadeInWidget(
           curveType: Curves.easeInOutCubic,
-          startDelay: const Duration(milliseconds: 1000),
+          startDelay: const Duration(milliseconds: 400),
           child: RichText(
             text: TextSpan(
               style: DefaultTextStyle.of(context)
                   .style
-                  .copyWith(fontSize: 9 + getScreenWidth(context) / 100),
+                  .copyWith(fontSize: responsiveFontSize(context, 9)),
               children: <TextSpan>[
                 const TextSpan(text: 'Hey there! I\'m just a '),
                 TextSpan(
@@ -86,8 +86,9 @@ class IntroductionSection extends StatelessWidget {
                     WidgetSpan(
                       child: OnHoverAnimatedText(
                         text: 'Computer Science',
-                        fontStyle: DefaultTextStyle.of(context).style.copyWith(
-                            fontSize: 9 + getScreenWidth(context) / 100),
+                        fontStyle: DefaultTextStyle.of(context)
+                            .style
+                            .copyWith(fontSize: responsiveFontSize(context, 9)),
                         colors: darkModeProvider.isDarkMode
                             ? Pastel7ColorfulTextDark.colorList
                             : Pastel7ColorfulTextLight.colorList,
@@ -103,8 +104,9 @@ class IntroductionSection extends StatelessWidget {
                     WidgetSpan(
                       child: OnHoverAnimatedText(
                         text: 'Flutter ',
-                        fontStyle: DefaultTextStyle.of(context).style.copyWith(
-                            fontSize: 9 + getScreenWidth(context) / 100),
+                        fontStyle: DefaultTextStyle.of(context)
+                            .style
+                            .copyWith(fontSize: responsiveFontSize(context, 9)),
                         colors: [
                           darkModeProvider.isDarkMode
                               ? ThemeData.dark().textTheme.bodyMedium!.color!
@@ -126,8 +128,9 @@ class IntroductionSection extends StatelessWidget {
                     WidgetSpan(
                       child: OnHoverAnimatedText(
                         text: 'Flutter. ',
-                        fontStyle: DefaultTextStyle.of(context).style.copyWith(
-                            fontSize: 9 + getScreenWidth(context) / 100),
+                        fontStyle: DefaultTextStyle.of(context)
+                            .style
+                            .copyWith(fontSize: responsiveFontSize(context, 9)),
                         colors: [
                           darkModeProvider.isDarkMode
                               ? ThemeData.dark().textTheme.bodyMedium!.color!
