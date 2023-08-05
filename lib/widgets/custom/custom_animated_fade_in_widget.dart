@@ -27,6 +27,7 @@ enum SlideDirection {
   bottomToTop,
   leftToRight,
   rightToLeft,
+  centerStill
 }
 
 class _AnimatedFadeInWidgetState extends State<AnimatedFadeInWidget>
@@ -49,7 +50,7 @@ class _AnimatedFadeInWidgetState extends State<AnimatedFadeInWidget>
       curve: curve,
     );
 
-    final slideDirection = widget.slideDirection ?? SlideDirection.topToBottom;
+    final slideDirection = widget.slideDirection ?? SlideDirection.centerStill;
     _slideAnimation = Tween<Offset>(
       begin: _getSlideOffset(slideDirection),
       end: Offset.zero,
@@ -75,6 +76,8 @@ class _AnimatedFadeInWidgetState extends State<AnimatedFadeInWidget>
         return const Offset(-1, 0);
       case SlideDirection.rightToLeft:
         return const Offset(1, 0);
+      case SlideDirection.centerStill:
+        return const Offset(0, 0);
     }
   }
 

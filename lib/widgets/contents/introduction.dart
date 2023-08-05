@@ -1,7 +1,7 @@
 import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:bwc_web1/provider/dark_mode_provider.dart';
 import 'package:bwc_web1/utils/color_gradient.dart';
-import 'package:bwc_web1/utils/responsive_fontsize.dart';
+import 'package:bwc_web1/utils/responsive_font_size.dart';
 import 'package:bwc_web1/widgets/custom/custom_animated_fade_in_widget.dart';
 import 'package:bwc_web1/widgets/custom/on_hover_animated_text.dart';
 import 'package:flutter/material.dart';
@@ -17,6 +17,7 @@ class IntroductionSection extends StatelessWidget {
     return Column(
       children: [
         AnimatedFadeInWidget(
+          slideDirection: SlideDirection.topToBottom,
           curveType: Curves.easeInOutCubic,
           startDelay: const Duration(milliseconds: 200),
           child: Row(

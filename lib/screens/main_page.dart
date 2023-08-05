@@ -2,7 +2,7 @@ import 'package:bwc_web1/provider/dark_mode_provider.dart';
 import 'package:bwc_web1/screens/about_page.dart';
 import 'package:bwc_web1/screens/front_page.dart';
 import 'package:bwc_web1/utils/color_gradient.dart';
-import 'package:bwc_web1/utils/responsive_fontsize.dart';
+import 'package:bwc_web1/utils/responsive_font_size.dart';
 import 'package:bwc_web1/widgets/contents/introduction.dart';
 import 'package:bwc_web1/widgets/custom/custom_animated_fade_in_text.dart';
 import 'package:bwc_web1/widgets/custom/smooth_gradient_background.dart';
@@ -60,7 +60,7 @@ class _MainPageState extends State<MainPage>
         title: Padding(
           padding: EdgeInsets.only(
               left: deviceType != DeviceType.phone
-                  ? (10 / 100) * screenWidth
+                  ? (10 / 100) * screenWidth // 10 percent of the screen width
                   : 0),
           child: GestureDetector(
             onTap: () {
