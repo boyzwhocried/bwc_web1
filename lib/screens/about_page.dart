@@ -1,3 +1,4 @@
+import 'package:bwc_web1/utils/lorem_ipsum_generator.dart';
 import 'package:bwc_web1/utils/responsive_font_size.dart';
 import 'package:bwc_web1/utils/screen_dimensions.dart';
 import 'package:bwc_web1/widgets/custom/custom_animated_fade_in_widget.dart';
@@ -9,41 +10,65 @@ class AboutPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    DeviceType deviceType = getDeviceType(context);
+
     return SingleChildScrollView(
       child: Padding(
-        padding: EdgeInsets.all((12 / 100) * getScreenWidth(context)),
-        child: Column(
+        padding: EdgeInsets.symmetric(
+            horizontal: (12 / 100) * getScreenWidth(context),
+            vertical: (5 / 100) * getScreenWidth(context)),
+        child: MediumAbout(),
+        // deviceType != DeviceType.desktop ? SmallAbout() : LargeAbout(),
+      ),
+    );
+  }
+}
+
+class SmallAbout extends StatelessWidget {
+  const SmallAbout({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        Stack(
           children: [
-            Stack(
-              children: [
-                AnimatedFadeInWidget(
+            Align(
+              alignment: Alignment.centerRight,
+              child: Padding(
+                padding: EdgeInsets.symmetric(
+                    vertical: (7 / 100) * getScreenWidth(context)),
+                child: AnimatedFadeInWidget(
                   startDelay: const Duration(milliseconds: 500),
-                  child: Container(
-                    alignment: Alignment.centerRight,
-                    child: AnimatedSpinWidget(
-                      endRotationDegree: 420,
-                      delayedStart: true,
-                      delayDuration: const Duration(milliseconds: 500),
-                      spinCurve: Curves.easeInOutCubic,
-                      child: ClipOval(
-                        child: Image.asset(
-                          'assets/images/profile.jpg',
-                          width: responsiveFontSize(
-                            context,
-                            100,
-                            maxFontSize: 150,
-                          ),
-                          height: responsiveFontSize(
-                            context,
-                            100,
-                            maxFontSize: 150,
-                          ),
-                          fit: BoxFit.cover,
+                  child: AnimatedSpinWidget(
+                    endRotationDegree: 420,
+                    delayedStart: true,
+                    delayDuration: const Duration(milliseconds: 500),
+                    spinCurve: Curves.easeInOutCubic,
+                    child: ClipOval(
+                      child: Image.asset(
+                        'assets/images/profile.jpg',
+                        width: responsiveFontSize(
+                          context,
+                          100,
+                          maxFontSize: 140,
                         ),
+                        height: responsiveFontSize(
+                          context,
+                          100,
+                          maxFontSize: 140,
+                        ),
+                        fit: BoxFit.cover,
                       ),
                     ),
                   ),
                 ),
+              ),
+            ),
+            Column(
+              children: [
                 AnimatedFadeInWidget(
                   slideDirection: SlideDirection.rightToLeft,
                   startDelay: const Duration(milliseconds: 200),
@@ -55,20 +80,191 @@ class AboutPage extends StatelessWidget {
                         fontWeight: FontWeight.bold),
                   ),
                 ),
+                Padding(
+                  padding: EdgeInsets.symmetric(
+                    vertical: (1 / 100) * getScreenWidth(context),
+                  ),
+                  child: Text(
+                    generateLoremIpsum(100),
+                    style: DefaultTextStyle.of(context)
+                        .style
+                        .copyWith(fontSize: responsiveFontSize(context, 9)),
+                  ),
+                ),
               ],
             ),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Text(
-                'The cusp of art and technology has always fascinated me and I\'ve never been afraid to just jump in and give it a go, whether it\'s Paint, Photoshop, Sketch or CSS. I’ve been designing with computers since the day I first opened Microsoft Paint. Fast forward to 2023 and I\’ve tried it all, from Digital Campaign Design and Flash Actionscript to Web Design, Animation, HTML/CSS, No-Code Web Development, Product Design and Product Management. Everything I have done, small or big, has been a vital stepping stone for where I am today. What excites me most about being a Product Designer is being able to design and create things that have purpose and solve real problems. It goes beyond designing buttons and websites and involves having a passion for designing experiences and solutions that help people, whether it\'s helping them make better videos, market themselves online, or buy something online. Leaning into customer insight and understanding their needs, finding the right problems to solve, delivering solutions as quickly as possible, learning from those and then iterating and improving that value over time is the key to great product design.',
-                style: DefaultTextStyle.of(context)
-                    .style
-                    .copyWith(fontSize: responsiveFontSize(context, 9)),
-              ),
-            )
           ],
         ),
-      ),
+      ],
+    );
+  }
+}
+
+class LargeAbout extends StatelessWidget {
+  const LargeAbout({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Expanded(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              AnimatedFadeInWidget(
+                slideDirection: SlideDirection.rightToLeft,
+                startDelay: const Duration(milliseconds: 200),
+                child: Text(
+                  'about me',
+                  style: TextStyle(
+                      fontSize: responsiveFontSize(context, 80,
+                          maxFontSize: 100, scalingFactor: 0.2),
+                      fontWeight: FontWeight.bold),
+                ),
+              ),
+              Padding(
+                padding: EdgeInsets.symmetric(
+                  vertical: (1 / 100) * getScreenWidth(context),
+                ),
+                child: Text(
+                  generateLoremIpsum(100),
+                  style: DefaultTextStyle.of(context)
+                      .style
+                      .copyWith(fontSize: responsiveFontSize(context, 9)),
+                ),
+              ),
+            ],
+          ),
+        ),
+        Align(
+          alignment: Alignment.topRight,
+          child: Padding(
+            padding: EdgeInsets.symmetric(
+                vertical: (7 / 100) * getScreenWidth(context)),
+            child: AnimatedFadeInWidget(
+              startDelay: const Duration(milliseconds: 500),
+              child: AnimatedSpinWidget(
+                endRotationDegree: 420,
+                delayedStart: true,
+                delayDuration: const Duration(milliseconds: 500),
+                spinCurve: Curves.easeInOutCubic,
+                child:
+                    //  SizedBox(
+                    //   height: responsiveFontSize(
+                    //     context,
+                    //     100,
+                    //     maxFontSize: 140,
+                    //   ),
+                    //   width: responsiveFontSize(
+                    //     context,
+                    //     100,
+                    //     maxFontSize: 140,
+                    //   ),
+                    // ),
+                    ClipOval(
+                  child: Image.asset(
+                    'assets/images/profile.jpg',
+                    width: responsiveFontSize(
+                      context,
+                      100,
+                      maxFontSize: 140,
+                    ),
+                    height: responsiveFontSize(
+                      context,
+                      100,
+                      maxFontSize: 140,
+                    ),
+                    fit: BoxFit.cover,
+                  ),
+                ),
+              ),
+            ),
+          ),
+        ),
+      ],
+    );
+  }
+}
+
+class MediumAbout extends StatelessWidget {
+  const MediumAbout({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        Stack(
+          children: [
+            Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Expanded(
+                  child:
+                      // TEXT2
+                      Padding(
+                    padding: EdgeInsets.symmetric(
+                      vertical: (1 / 100) * getScreenWidth(context),
+                    ),
+                    child: Text(
+                      generateLoremIpsum(100),
+                      style: DefaultTextStyle.of(context)
+                          .style
+                          .copyWith(fontSize: responsiveFontSize(context, 9)),
+                    ),
+                  ),
+                ),
+                // IMAGE
+                Padding(
+                  padding: EdgeInsets.symmetric(
+                      vertical: (7 / 100) * getScreenWidth(context)),
+                  child: AnimatedFadeInWidget(
+                    startDelay: const Duration(milliseconds: 500),
+                    child: AnimatedSpinWidget(
+                      endRotationDegree: 420,
+                      delayedStart: true,
+                      delayDuration: const Duration(milliseconds: 500),
+                      spinCurve: Curves.easeInOutCubic,
+                      child: ClipOval(
+                        child: Image.asset(
+                          'assets/images/profile.jpg',
+                          width: responsiveFontSize(
+                            context,
+                            100,
+                            maxFontSize: 140,
+                          ),
+                          height: responsiveFontSize(
+                            context,
+                            100,
+                            maxFontSize: 140,
+                          ),
+                          fit: BoxFit.cover,
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+            // TEXT1
+            AnimatedFadeInWidget(
+              slideDirection: SlideDirection.rightToLeft,
+              startDelay: const Duration(milliseconds: 200),
+              child: Text(
+                'about me',
+                style: TextStyle(
+                    fontSize: responsiveFontSize(context, 80,
+                        maxFontSize: 100, scalingFactor: 0.2),
+                    fontWeight: FontWeight.bold),
+              ),
+            ),
+          ],
+        ),
+      ],
     );
   }
 }

@@ -130,7 +130,8 @@ class _MainPageState extends State<MainPage>
       ),
       body: SmoothGradientBackground(
         gradientDirectionType: GradientDirectionType.dynamic,
-        gradients: Pastel7ColorfulA50.colorList,
+        // gradients: Pastel7ColorfulA150.colorList,
+        gradients: Pastel7Colorful.withAlpha(opacity: 0.5),
         child: TabBarView(
           controller: _tabController,
           children: const [

@@ -1,19 +1,15 @@
 import 'package:animated_text_kit/animated_text_kit.dart';
-import 'package:bwc_web1/provider/dark_mode_provider.dart';
 import 'package:bwc_web1/utils/color_gradient.dart';
 import 'package:bwc_web1/utils/responsive_font_size.dart';
 import 'package:bwc_web1/widgets/custom/custom_animated_fade_in_widget.dart';
 import 'package:bwc_web1/widgets/custom/on_hover_animated_text.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 
 class IntroductionSection extends StatelessWidget {
   const IntroductionSection({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final darkModeProvider = Provider.of<DarkModeProvider>(context);
-
     return Column(
       children: [
         AnimatedFadeInWidget(
@@ -90,9 +86,8 @@ class IntroductionSection extends StatelessWidget {
                         fontStyle: DefaultTextStyle.of(context)
                             .style
                             .copyWith(fontSize: responsiveFontSize(context, 9)),
-                        colors: darkModeProvider.isDarkMode
-                            ? Pastel7ColorfulTextDark.colorList
-                            : Pastel7ColorfulTextLight.colorList,
+                        colors: ColorGradientText.getColorList(
+                            context, Pastel7Colorful.withAlpha()),
                       ),
                     ),
                   ],
@@ -104,19 +99,12 @@ class IntroductionSection extends StatelessWidget {
                   children: [
                     WidgetSpan(
                       child: OnHoverAnimatedText(
-                        text: 'Flutter ',
+                        text: 'Flutter',
                         fontStyle: DefaultTextStyle.of(context)
                             .style
                             .copyWith(fontSize: responsiveFontSize(context, 9)),
-                        colors: [
-                          darkModeProvider.isDarkMode
-                              ? ThemeData.dark().textTheme.bodyMedium!.color!
-                              : ThemeData.light().textTheme.bodyMedium!.color!,
-                          Colors.lightBlueAccent,
-                          darkModeProvider.isDarkMode
-                              ? ThemeData.dark().textTheme.bodyMedium!.color!
-                              : ThemeData.light().textTheme.bodyMedium!.color!,
-                        ],
+                        colors: ColorGradientText.getColorList(
+                            context, [Colors.lightBlueAccent]),
                       ),
                     ),
                   ],
@@ -132,15 +120,8 @@ class IntroductionSection extends StatelessWidget {
                         fontStyle: DefaultTextStyle.of(context)
                             .style
                             .copyWith(fontSize: responsiveFontSize(context, 9)),
-                        colors: [
-                          darkModeProvider.isDarkMode
-                              ? ThemeData.dark().textTheme.bodyMedium!.color!
-                              : ThemeData.light().textTheme.bodyMedium!.color!,
-                          Colors.lightBlueAccent,
-                          darkModeProvider.isDarkMode
-                              ? ThemeData.dark().textTheme.bodyMedium!.color!
-                              : ThemeData.light().textTheme.bodyMedium!.color!,
-                        ],
+                        colors: ColorGradientText.getColorList(
+                            context, [Colors.lightBlueAccent]),
                       ),
                     ),
                   ],
