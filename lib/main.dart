@@ -1,5 +1,3 @@
-// ignore: unused_import
-import 'package:bwc_web1/others/temp/test.dart';
 import 'package:bwc_web1/provider/dark_mode_provider.dart';
 import 'package:bwc_web1/screens/main_page.dart';
 import 'package:flutter/material.dart';
@@ -40,9 +38,10 @@ class MyApp extends StatelessWidget {
           themeMode:
               darkModeProvider.isDarkMode ? ThemeMode.dark : ThemeMode.light,
           home:
+              // const TextLineTestHome(),
               // TestPageProvider(),
               const MainPage(),
-          // const Test(),
+              // const Test(),
           debugShowCheckedModeBanner: false,
         );
       }),
