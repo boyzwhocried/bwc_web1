@@ -2,7 +2,9 @@ import 'package:bwc_web1/provider/dark_mode_provider.dart';
 import 'package:bwc_web1/screens/about_page.dart';
 import 'package:bwc_web1/screens/front_page.dart';
 import 'package:bwc_web1/utils/color_gradient.dart';
+import 'package:bwc_web1/utils/constants.dart';
 import 'package:bwc_web1/utils/responsive_font_size.dart';
+import 'package:bwc_web1/utils/responsive_padding_size.dart';
 import 'package:bwc_web1/widgets/contents/introduction.dart';
 import 'package:bwc_web1/widgets/custom/custom_animated_fade_in_text.dart';
 import 'package:bwc_web1/widgets/custom/smooth_gradient_background.dart';
@@ -56,11 +58,12 @@ class _MainPageState extends State<MainPage>
         toolbarHeight:
             deviceType != DeviceType.phone ? 70 + screenWidth / 80 : 70,
         backgroundColor:
-            Theme.of(context).colorScheme.inversePrimary.withOpacity(0.2),
+            Theme.of(context).colorScheme.inversePrimary.withOpacity(0.5),
         title: Padding(
           padding: EdgeInsets.only(
               left: deviceType != DeviceType.phone
-                  ? (10 / 100) * screenWidth // 10 percent of the screen width
+                  ? responsivePaddingSize(
+                      context, 10) // 10 percent of the screen width
                   : 0),
           child: GestureDetector(
             onTap: () {
@@ -69,9 +72,10 @@ class _MainPageState extends State<MainPage>
             child: AnimatedFadeInText(
               text: 'boyzwhocried',
               textStyle: TextStyle(
-                  letterSpacing: 2.0,
-                  fontWeight: FontWeight.w600,
-                  fontSize: responsiveFontSize(context, 20)),
+                letterSpacing: 2.0,
+                fontWeight: FontWeight.w600,
+                fontSize: responsiveFontSize(context, 20),
+              ),
               slideDirection: deviceType == DeviceType.phone
                   ? TextSlideDirection.topToBottom
                   : TextSlideDirection.leftToRight,
@@ -130,14 +134,22 @@ class _MainPageState extends State<MainPage>
       ),
       body: SmoothGradientBackground(
         gradientDirectionType: GradientDirectionType.dynamic,
-        // gradients: Pastel7ColorfulA150.colorList,
-        gradients: Pastel7Colorful.withAlpha(opacity: 0.5),
+        gradients: ColorListSeemless.withMainColor(
+          mainColor: Constants().mainColorTheme,
+          opacity: 0.5,
+          amount: 7,
+          hueDegree: 45,
+        ),
         child: TabBarView(
           controller: _tabController,
-          children: const [
-            FrontPage(),
-            IntroductionSection(), // Explore page
-            AboutPage(), // Aabout page
+          children: [
+            FrontPage(
+              updateCallback: (pageIndex) {
+                switchPage(pageIndex);
+              },
+            ), // Front Page
+            const IntroductionSection(), // Explore page
+            const AboutPage(), // Aabout page
           ],
         ),
       ),

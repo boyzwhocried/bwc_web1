@@ -18,15 +18,54 @@ class Pastel7Colorful {
 }
 
 class ColorGradientText {
-  static List<Color> getColorList(BuildContext context, List<Color> colors) {
+  static List<Color> getColorList(BuildContext context, List<Color> colors,
+      {double opacity = 1}) {
     final themeData = Provider.of<DarkModeProvider>(context).isDarkMode
         ? ThemeData.dark()
         : ThemeData.light();
 
     return [
-      themeData.textTheme.bodyMedium!.color!,
+      themeData.textTheme.bodyMedium!.color!.withOpacity(opacity),
       ...colors,
-      themeData.textTheme.bodyLarge!.color!,
+      themeData.textTheme.bodyLarge!.color!.withOpacity(opacity),
     ];
+  }
+}
+
+class ColorListSeemless {
+  static List<Color> withMainColor({
+    double opacity = 1,
+    required Color mainColor,
+    int amount = 7,
+
+    // The color hue spectrum that will be use in degree (360 = full spectrum)
+    double hueDegree = 360.0,
+  }) {
+    final List<Color> colorList = [];
+
+    // Convert the mainColor to HSLColor
+    final HSLColor mainHSLColor = HSLColor.fromColor(mainColor);
+
+    // Calculate the hue difference between each color
+    final double hueDifference = hueDegree / amount;
+
+    for (int i = 0; i < amount; i++) {
+      final double hue = (mainHSLColor.hue + i * hueDifference) % 360.0;
+      final Color generatedColor = HSLColor.fromAHSL(
+        opacity,
+        hue,
+        mainHSLColor.saturation,
+        mainHSLColor.lightness,
+      ).toColor();
+
+      colorList.add(generatedColor);
+    }
+
+    // Duplicate the list and remove the last color to avoid repetition when looping
+    List<Color> duplicatedList = List.from(colorList);
+    duplicatedList.removeLast();
+    colorList.addAll(duplicatedList.reversed);
+
+    return colorList;
   }
 }

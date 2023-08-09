@@ -1,5 +1,6 @@
 import 'package:bwc_web1/provider/dark_mode_provider.dart';
 import 'package:bwc_web1/screens/main_page.dart';
+import 'package:bwc_web1/utils/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
@@ -24,24 +25,18 @@ class MyApp extends StatelessWidget {
           theme: ThemeData(
             brightness: Brightness.light,
             fontFamily: GoogleFonts.poppins().fontFamily,
-            // colorSchemeSeed: const Color.fromARGB(255, 58, 137, 183),
-            colorSchemeSeed: const Color.fromARGB(255, 215, 255, 195),
+            colorSchemeSeed: Constants().mainColorTheme,
             useMaterial3: true,
           ),
           darkTheme: ThemeData(
             brightness: Brightness.dark,
             fontFamily: GoogleFonts.poppins().fontFamily,
-            // colorSchemeSeed: const Color.fromARGB(255, 58, 137, 183),
-            colorSchemeSeed: const Color.fromARGB(255, 215, 255, 195),
+            colorSchemeSeed: Constants().mainColorTheme,
             useMaterial3: true,
           ),
           themeMode:
               darkModeProvider.isDarkMode ? ThemeMode.dark : ThemeMode.light,
-          home:
-              // const TextLineTestHome(),
-              // TestPageProvider(),
-              const MainPage(),
-          //  Test(),
+          home: const MainPage(),
           debugShowCheckedModeBanner: false,
         );
       }),

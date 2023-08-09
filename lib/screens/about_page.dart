@@ -79,13 +79,14 @@ class SmallAbout extends StatelessWidget {
                         fontWeight: FontWeight.bold),
                   ),
                 ),
-                getScreenWidth(context) <= 701
+                getScreenWidth(context) <=
+                        701 // STILL HARD CODED, NEED DIFFERENT APPROACH FOR RESPONSIVENESS
                     ? Padding(
                         padding: EdgeInsets.symmetric(
                           vertical: (1 / 100) * getScreenWidth(context),
                         ),
                         child: Text(
-                          generateLoremIpsum(100, context),
+                          generateLoremIpsum(100),
                           style: DefaultTextStyle.of(context).style.copyWith(
                               fontSize: responsiveFontSize(context, 9)),
                         ),
@@ -95,10 +96,10 @@ class SmallAbout extends StatelessWidget {
                           Expanded(
                             child: Padding(
                               padding: EdgeInsets.symmetric(
-                                vertical: (1 / 100) * getScreenWidth(context),
+                                vertical: responsivePaddingSize(context, 1),
                               ),
                               child: Text(
-                                generateLoremIpsum(100, context),
+                                generateLoremIpsum(100),
                                 style: DefaultTextStyle.of(context)
                                     .style
                                     .copyWith(
@@ -109,7 +110,7 @@ class SmallAbout extends StatelessWidget {
                           ),
                           Padding(
                             padding: EdgeInsets.only(
-                                left: responsivePaddingSize(context, 20)),
+                                left: responsivePaddingSize(context, 2)),
                             child: SizedBox(
                               width: responsiveFontSize(
                                 context,

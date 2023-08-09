@@ -3,10 +3,9 @@ import 'package:flutter/material.dart';
 
 double responsivePaddingSize(
   BuildContext context,
-  double paddingSizePercentage,
+  double rawPaddingSizePercentage,
 ) {
   double screenWidth = getScreenWidth(context);
-
-  (paddingSizePercentage / 100) * screenWidth;
+  double paddingSizePercentage = (rawPaddingSizePercentage / 100) * screenWidth;
   return paddingSizePercentage;
 }
