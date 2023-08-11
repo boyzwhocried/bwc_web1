@@ -138,7 +138,7 @@ class _MainPageState extends State<MainPage>
           mainColor: Constants().mainColorTheme,
           opacity: 0.5,
           amount: 7,
-          hueDegree: 45,
+          hueDegree: 90,
         ),
         child: TabBarView(
           controller: _tabController,
