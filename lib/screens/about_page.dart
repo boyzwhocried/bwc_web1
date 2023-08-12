@@ -80,18 +80,13 @@ class SmallAbout extends StatelessWidget {
                   ),
                 ),
                 AnimatedFadeInWidget(
-                    startDelay: const Duration(milliseconds: 200),
-                    child: getScreenWidth(context) <= 701
-                        ? const Layout1()
-                        : getScreenWidth(context) <= 880
-                            ? const Layout2()
-                            : const Layout3()),
-                // if (getScreenWidth(context) <= 701)
-                //   const Layout1()
-                // else if (getScreenWidth(context) <= 880)
-                //   const Layout2()
-                // else
-                //   const Layout3()
+                  startDelay: const Duration(milliseconds: 200),
+                  child: getScreenWidth(context) <= 701
+                      ? const Layout1()
+                      : getScreenWidth(context) <= 880
+                          ? const Layout2()
+                          : const Layout3(),
+                ),
               ],
             ),
           ],
@@ -116,11 +111,9 @@ class Layout3 extends StatelessWidget {
               vertical: responsivePaddingSize(context, 1),
             ),
             child: Text(
-              // generateLoremIpsum(100),
               Constants().aboutMeFirstParagraph(),
               style: DefaultTextStyle.of(context).style.copyWith(
                     fontSize:
-                        // 18
                         responsiveFontSize(
                             context, Constants().aboutMeFirstParagraphFontSize,
                             scalingFactor: 0.15),
@@ -166,11 +159,9 @@ class Layout2 extends StatelessWidget {
             ),
           ),
           Text(
-            // generateLoremIpsum(100),
             Constants().aboutMeFirstParagraph(),
             style: DefaultTextStyle.of(context).style.copyWith(
                   fontSize:
-                      // 18
                       responsiveFontSize(
                           context, Constants().aboutMeFirstParagraphFontSize,
                           scalingFactor: 0.15),
@@ -194,11 +185,9 @@ class Layout1 extends StatelessWidget {
         vertical: (1 / 100) * getScreenWidth(context),
       ),
       child: Text(
-        // generateLoremIpsum(100),
         Constants().aboutMeFirstParagraph(),
         style: DefaultTextStyle.of(context).style.copyWith(
               fontSize:
-                  // 18
                   responsiveFontSize(
                       context, Constants().aboutMeFirstParagraphFontSize,
                       scalingFactor: 0.15),
