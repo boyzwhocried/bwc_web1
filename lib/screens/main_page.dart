@@ -1,8 +1,8 @@
 import 'package:bwc_web1/provider/dark_mode_provider.dart';
 import 'package:bwc_web1/screens/about_page.dart';
 import 'package:bwc_web1/screens/front_page.dart';
-import 'package:bwc_web1/utils/color_gradient.dart';
 import 'package:bwc_web1/utils/constants.dart';
+
 import 'package:bwc_web1/utils/responsive_font_size.dart';
 import 'package:bwc_web1/utils/responsive_padding_size.dart';
 import 'package:bwc_web1/widgets/contents/introduction.dart';
@@ -134,12 +134,7 @@ class _MainPageState extends State<MainPage>
       ),
       body: SmoothGradientBackground(
         gradientDirectionType: GradientDirectionType.dynamic,
-        gradients: ColorListSeemless.withMainColor(
-          mainColor: Constants().mainColorTheme,
-          opacity: 0.5,
-          amount: 7,
-          hueDegree: 90,
-        ),
+        gradients: Constants().backgroundColorGradient(),
         child: TabBarView(
           controller: _tabController,
           children: [

@@ -20,7 +20,7 @@ class SmoothGradientBackground extends StatefulWidget {
   const SmoothGradientBackground({
     super.key,
     required this.gradients,
-    this.duration = const Duration(seconds: 2),
+    this.duration = const Duration(seconds: 1),
     required this.child,
     this.gradientDirectionType = GradientDirectionType.static,
     this.staticGradientBegin = Alignment.topLeft,

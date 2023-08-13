@@ -25,13 +25,13 @@ class MyApp extends StatelessWidget {
           theme: ThemeData(
             brightness: Brightness.light,
             fontFamily: GoogleFonts.poppins().fontFamily,
-            colorSchemeSeed: Constants().mainColorTheme,
+            colorSchemeSeed: Constants().mainColorTheme(),
             useMaterial3: true,
           ),
           darkTheme: ThemeData(
             brightness: Brightness.dark,
             fontFamily: GoogleFonts.poppins().fontFamily,
-            colorSchemeSeed: Constants().mainColorTheme,
+            colorSchemeSeed: Constants().mainColorTheme(),
             useMaterial3: true,
           ),
           themeMode:
