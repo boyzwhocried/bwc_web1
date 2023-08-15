@@ -14,7 +14,7 @@ class Layout3 extends StatelessWidget {
       children: [
         Expanded(
           child: Text(
-            Constants().aboutMeFirstParagraph(),
+            Constants().aboutMeSection1Paragraph(),
             style: Constants().responsiveTextStyleContent(context),
           ),
         ),
@@ -52,7 +52,7 @@ class Layout2 extends StatelessWidget {
           ),
         ),
         Text(
-          Constants().aboutMeFirstParagraph(),
+          Constants().aboutMeSection1Paragraph(),
           style: Constants().responsiveTextStyleContent(context),
         ),
       ],
@@ -68,7 +68,7 @@ class Layout1 extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Text(
-      Constants().aboutMeFirstParagraph(),
+      Constants().aboutMeSection1Paragraph(),
       style: Constants().responsiveTextStyleContent(context),
     );
   }

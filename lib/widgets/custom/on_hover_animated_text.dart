@@ -37,6 +37,7 @@ class _OnHoverAnimatedTextState extends State<OnHoverAnimatedText> {
           ? Consumer<DarkModeProvider>(
               builder: (context, darkModeProvider, child) {
                 return AnimatedTextKit(
+                  
                   isRepeatingAnimation: false,
                   onNextBeforePause: (p0, p1) {
                     _isHovering = false;

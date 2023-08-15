@@ -2,6 +2,7 @@ import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:bwc_web1/utils/color_gradient.dart';
 import 'package:bwc_web1/utils/responsive_font_size.dart';
 import 'package:bwc_web1/widgets/custom/custom_animated_fade_in_widget.dart';
+import 'package:bwc_web1/widgets/custom/custom_animated_word_in_paragraph.dart';
 import 'package:bwc_web1/widgets/custom/on_hover_animated_text.dart';
 import 'package:flutter/material.dart';
 
@@ -131,6 +132,34 @@ class IntroductionSection extends StatelessWidget {
             ),
           ),
         ),
+        SizedBox(height: 12),
+        AnimatedWordsInParagraph(
+          textStyle: DefaultTextStyle.of(context)
+              .style
+              .copyWith(fontSize: responsiveFontSize(context, 9)),
+          paragraph:
+              "Hey there! I'm just a Computer Science student from Indonesia who enjoys learing by doing stuff. So, I made this website using Flutter, you know, to learn how to build a responsive website with only Flutter. No, biggie, just trying things out!",
+          animatedWords: [
+            AnimatedWord(
+              word: 'Computer Science',
+              colors:
+                  ColorGradientText.getColorList(context, [Colors.redAccent]),
+              onTap: () {
+                print('computer');
+                // Do something when 'Computer Science' is tapped.
+              },
+            ),
+            AnimatedWord(
+              word: 'doing',
+              colors: ColorGradientText.getColorList(
+                  context, [Colors.lightBlueAccent]),
+              onTap: () {
+                print('student');
+                // Do something when 'Flutter' is tapped.
+              },
+            ),
+          ],
+        )
       ],
     );
   }
