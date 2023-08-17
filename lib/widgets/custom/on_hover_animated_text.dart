@@ -7,12 +7,17 @@ class OnHoverAnimatedText extends StatefulWidget {
   final String text;
   final TextStyle fontStyle;
   final List<Color> colors;
+  final Duration? speed;
+
+  final VoidCallback? onTap;
 
   const OnHoverAnimatedText({
     super.key,
     required this.text,
     required this.fontStyle,
     required this.colors,
+    this.speed,
+    this.onTap,
   });
 
   @override
@@ -37,7 +42,7 @@ class _OnHoverAnimatedTextState extends State<OnHoverAnimatedText> {
           ? Consumer<DarkModeProvider>(
               builder: (context, darkModeProvider, child) {
                 return AnimatedTextKit(
-                  
+                  onTap: widget.onTap,
                   isRepeatingAnimation: false,
                   onNextBeforePause: (p0, p1) {
                     _isHovering = false;
@@ -48,6 +53,7 @@ class _OnHoverAnimatedTextState extends State<OnHoverAnimatedText> {
                       widget.text,
                       textStyle: widget.fontStyle,
                       colors: widget.colors,
+                      speed: widget.speed ?? const Duration(milliseconds: 200),
                     ),
                   ],
                 );

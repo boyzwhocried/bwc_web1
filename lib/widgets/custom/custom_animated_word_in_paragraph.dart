@@ -1,4 +1,3 @@
-import 'package:bwc_web1/utils/responsive_font_size.dart';
 import 'package:flutter/material.dart';
 
 import 'on_hover_animated_text.dart';
@@ -7,23 +6,19 @@ class AnimatedWordsInParagraph extends StatelessWidget {
   final String paragraph;
   final List<AnimatedWord> animatedWords;
   final TextStyle textStyle;
-  // final VoidCallback? onTap;
 
   const AnimatedWordsInParagraph({
     super.key,
     required this.paragraph,
     required this.animatedWords,
     required this.textStyle,
-    // this.onTap,
   });
 
   @override
   Widget build(BuildContext context) {
     return RichText(
       text: TextSpan(
-        style: DefaultTextStyle.of(context).style.copyWith(
-              fontSize: responsiveFontSize(context, 9),
-            ),
+        style: textStyle,
         children: _buildTextSpans(context),
       ),
     );
@@ -33,13 +28,13 @@ class AnimatedWordsInParagraph extends StatelessWidget {
     List<TextSpan> textSpans = [];
     final words = paragraph.split(' ');
 
-    for (int i = 0; i < words.length; i++) {
-      final word = words[i];
+    int currentIndex = 0;
+    while (currentIndex < words.length) {
       bool isAnimated = false;
       AnimatedWord? animatedWord;
 
       for (final aw in animatedWords) {
-        if (aw.word.contains(word)) {
+        if (aw.word.startsWith(words[currentIndex])) {
           isAnimated = true;
           animatedWord = aw;
           break;
@@ -47,56 +42,38 @@ class AnimatedWordsInParagraph extends StatelessWidget {
       }
 
       if (isAnimated && animatedWord != null) {
-        final wordIndex = animatedWord.word.indexOf(word);
+        final word = animatedWord.word;
+        final wordLength = word.split(' ').length;
 
-        if (wordIndex == 0) {
-          textSpans.add(
-            TextSpan(
-              children: [
-                WidgetSpan(
-                  child: GestureDetector(
+        textSpans.add(
+          TextSpan(
+            children: [
+              WidgetSpan(
+                child: GestureDetector(
+                  onTap: animatedWord.onTap,
+                  child: OnHoverAnimatedText(
+                    text: word,
+                    fontStyle: textStyle,
+                    colors: animatedWord.colors,
                     onTap: animatedWord.onTap,
-                    child: OnHoverAnimatedText(
-                      text: animatedWord.word,
-                      fontStyle: textStyle,
-                      colors: animatedWord.colors,
-                      // onTap: animatedWord.onTap,
-                    ),
+                    speed: animatedWord.speed,
                   ),
                 ),
-                if (i < words.length - 1) const TextSpan(text: ' ')
-              ],
-            ),
-          );
-        }
+              ),
+              if (currentIndex + wordLength < words.length - 1)
+                const TextSpan(text: ' ')
+            ],
+          ),
+        );
 
-        /* else {
-          textSpans.add(
-            TextSpan(text: '$word${i < words.length - 1 ? ' ' : ''}'),
-          );
-        } */
-
-        // textSpans.add(
-        //   TextSpan(
-        //     children: [
-        //       WidgetSpan(
-        //         child: GestureDetector(
-        //           onTap: animatedWord.onTap,
-        //           child: OnHoverAnimatedText(
-        //             text: word,
-        //             fontStyle: textStyle,
-        //             colors: animatedWord.colors,
-        //           ),
-        //         ),
-        //       ),
-        //       if (i < words.length - 1) const TextSpan(text: ' ')
-        //     ],
-        //   ),
-        // );
+        currentIndex += wordLength;
       } else {
         textSpans.add(
-          TextSpan(text: '$word${i < words.length - 1 ? ' ' : ''}'),
+          TextSpan(
+            text: '${words[currentIndex]} ',
+          ),
         );
+        currentIndex++;
       }
     }
 
@@ -107,11 +84,13 @@ class AnimatedWordsInParagraph extends StatelessWidget {
 class AnimatedWord {
   final String word;
   final List<Color> colors;
-  final VoidCallback onTap;
+  final Duration? speed;
+  final VoidCallback? onTap;
 
   AnimatedWord({
     required this.word,
     required this.colors,
-    required this.onTap,
+    this.speed,
+    this.onTap,
   });
 }

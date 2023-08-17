@@ -20,6 +20,12 @@ class Constants {
     );
   }
 
+  String frontPageIntroductionParagraph() {
+    String frontPageIntroductionParagraph =
+        '''Hey there! I'm just a Computer Science student from Indonesia who enjoys learing by doing stuff. So, I made this website using Flutter, you know, to learn how to build a responsive website with only Flutter. No, biggie, just trying things out!''';
+    return frontPageIntroductionParagraph;
+  }
+
   String aboutMeSection1Paragraph() {
     String aboutMeSection1Paragraph =
         // chill
@@ -33,11 +39,11 @@ class Constants {
 
   String aboutMeSection2Paragraph() {
     String aboutMeSection2Paragraph =
-        '''My first achievement was earning an Associate Degree in Mechatronics from Manufacturing Polytechnic Bandung, which opened my eyes to the art of crafting seamless interactions between various hardware and software components. The culmination of this phase was my exhilarating Final Project—a captivating 3D Engraving Machine brought to life using Visual Basic .NET. \n'''
-        '''\n'''
-        '''Building upon this foundation, I pursued a Bachelor's Degree in Computer Science from Binus University. Here, I delved into micro frontend concepts and the art of creating user-friendly experiences using React.js to build a human resource app for a company's task management.\n'''
-        '''\n'''
-        '''I also have completed a few courses and certifications in FLutter and Dart, Stragtegic Management, Statistic and Probability, and English.''';
+        '''My first achievement was earning an Associate Degree in Mechatronics from Manufacturing Polytechnic Bandung, which opened my eyes to the art of crafting seamless interactions between various hardware and software components. The culmination of this phase was my exhilarating Final Project—a captivating 3D Engraving Machine brought to life using Visual Basic .NET.'''
+        '''\n\n'''
+        '''Building upon this foundation, I pursued a Bachelor's Degree in Computer Science from Binus University. Here, I delved into micro frontend concepts and the art of creating user-friendly experiences using React.js to build a human resource app for a company's task management.'''
+        '''\n\n'''
+        '''I also have completed a few courses and certifications in Flutter and Dart, Stragtegic Management, Statistic and Probability, and English.''';
     return aboutMeSection2Paragraph;
   }
 
