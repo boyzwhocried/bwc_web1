@@ -34,14 +34,7 @@ class AboutMeSection2 extends StatelessWidget {
             ),
             child: Column(
               children: [
-                // Text(
-                //   // generateLoremIpsum(100),
-                //   Constants().aboutMeSection2Paragraph(),
-                //   style: Constants().responsiveTextStyleContent(context),
-                // ),
-                // SizedBox(
-                //   height: responsivePaddingSize(context, 5),
-                // ),
+                
                 AnimatedWordsInParagraph(
                   paragraph: Constants().aboutMeSection2Paragraph(),
                   animatedWords: [
