@@ -1,6 +1,6 @@
 import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:bwc_web1/utils/color_gradient.dart';
-import 'package:bwc_web1/utils/constants.dart';
+import 'package:bwc_web1/utils/constants/constants.dart';
 import 'package:bwc_web1/utils/responsive_font_size.dart';
 import 'package:bwc_web1/utils/url_launcher.dart';
 import 'package:bwc_web1/widgets/custom/custom_animated_fade_in_widget.dart';
@@ -82,7 +82,10 @@ class IntroductionSection extends StatelessWidget {
               AnimatedWord(
                 word: 'Computer Science',
                 colors: ColorGradientText.getColorList(
-                    context, Pastel7Colorful.withAlpha()),
+                  context,
+                  Constants().customColors.pastelIridescent,
+                  // Pastel7Colorful.withAlpha(),
+                ),
                 onTap: () {
                   urlLaunchInBrowser(
                       'https://en.wikipedia.org/wiki/Computer_science');
@@ -91,7 +94,7 @@ class IntroductionSection extends StatelessWidget {
               AnimatedWord(
                 word: 'Flutter,',
                 colors: ColorGradientText.getColorList(
-                    context, [Colors.lightBlueAccent]),
+                    context, Constants().customColors.logoColors.flutter),
                 onTap: () {
                   urlLaunchInBrowser('https://flutter.dev/');
                 },
@@ -99,7 +102,7 @@ class IntroductionSection extends StatelessWidget {
               AnimatedWord(
                 word: 'Flutter.',
                 colors: ColorGradientText.getColorList(
-                    context, [Colors.lightBlueAccent]),
+                    context, Constants().customColors.logoColors.flutter),
                 onTap: () {
                   urlLaunchInBrowser('https://flutter.dev/');
                 },

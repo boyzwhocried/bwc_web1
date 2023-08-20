@@ -1,6 +1,6 @@
 import 'package:bwc_web1/provider/dark_mode_provider.dart';
 import 'package:bwc_web1/screens/main_page.dart';
-import 'package:bwc_web1/utils/constants.dart';
+import 'package:bwc_web1/utils/constants/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
@@ -25,13 +25,13 @@ class MyApp extends StatelessWidget {
           theme: ThemeData(
             brightness: Brightness.light,
             fontFamily: GoogleFonts.poppins().fontFamily,
-            colorSchemeSeed: Constants().mainColorTheme(),
+            colorSchemeSeed: Constants().customColors.mainThemeColor.greenLime,
             useMaterial3: true,
           ),
           darkTheme: ThemeData(
             brightness: Brightness.dark,
             fontFamily: GoogleFonts.poppins().fontFamily,
-            colorSchemeSeed: Constants().mainColorTheme(),
+            colorSchemeSeed: Constants().customColors.mainThemeColor.greenLime,
             useMaterial3: true,
           ),
           themeMode:

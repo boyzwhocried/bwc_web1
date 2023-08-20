@@ -1,19 +1,14 @@
 import 'package:bwc_web1/utils/color_gradient.dart';
+import 'package:bwc_web1/utils/constants/custom_colors.dart';
 import 'package:bwc_web1/utils/responsive_font_size.dart';
 import 'package:flutter/material.dart';
 
 class Constants {
-  Color mainColorTheme() {
-    return // COLOR THEMES
-        const Color.fromARGB(255, 104, 160, 88);
-    // const Color.fromARGB(255, 152, 152, 137); // GREEN SAGE
-    // const Color.fromARGB(255, 6, 112, 92); // TEAL
-    // const Color.fromARGB(255, 112, 6, 98); // VIOLET
-  }
+  CustomColors get customColors => const CustomColors();
 
   List<Color> backgroundColorGradient() {
-    return ColorListSeemless.withMainColor(
-      mainColor: Constants().mainColorTheme(),
+    return ColorGradientGenerator.withMainColor(
+      mainColor: Constants().customColors.mainThemeColor.greenLime,
       opacity: 0.5,
       amount: 11,
       hueDegree: 120,
@@ -66,5 +61,9 @@ class Constants {
     );
     return DefaultTextStyle.of(context).style.copyWith(
         fontSize: responsivefontSizeMedium1, fontWeight: FontWeight.bold);
+  }
+
+  TextStyle defaultTextStyle(BuildContext context) {
+    return DefaultTextStyle.of(context).style;
   }
 }

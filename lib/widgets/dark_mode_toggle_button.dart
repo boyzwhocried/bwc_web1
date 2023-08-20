@@ -20,8 +20,8 @@ class DarkModeToggleButton extends StatelessWidget {
       },
       icon: AnimatedFadeInIcon(
         iconData: darkModeProvider.isDarkMode
-            ? Icons.light_mode_outlined
-            : Icons.dark_mode_outlined,
+            ? Icons.dark_mode_outlined
+            : Icons.light_mode_outlined,
         delay: const Duration(milliseconds: 500),
       ),
       iconSize: iconSize,

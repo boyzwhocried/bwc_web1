@@ -1,7 +1,8 @@
-import 'package:flutter/material.dart';
+import 'package:flutter/foundation.dart';
 
 class DarkModeProvider with ChangeNotifier {
-  bool _isDarkMode = false;
+  bool _isDarkMode =
+      PlatformDispatcher.instance.platformBrightness == Brightness.dark;
 
   bool get isDarkMode => _isDarkMode;
 

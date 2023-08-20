@@ -1,7 +1,7 @@
 import 'package:bwc_web1/provider/dark_mode_provider.dart';
 import 'package:bwc_web1/screens/about_page.dart';
 import 'package:bwc_web1/screens/front_page.dart';
-import 'package:bwc_web1/utils/constants.dart';
+import 'package:bwc_web1/utils/constants/constants.dart';
 
 import 'package:bwc_web1/utils/responsive_font_size.dart';
 import 'package:bwc_web1/utils/responsive_padding_size.dart';
