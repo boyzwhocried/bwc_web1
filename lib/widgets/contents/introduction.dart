@@ -84,7 +84,6 @@ class IntroductionSection extends StatelessWidget {
                 colors: ColorGradientText.getColorList(
                   context,
                   Constants().customColors.pastelIridescent,
-                  // Pastel7Colorful.withAlpha(),
                 ),
                 onTap: () {
                   urlLaunchInBrowser(
