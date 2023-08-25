@@ -1,5 +1,5 @@
+import 'package:bwc_web1/others/temp/spotify_profile.dart';
 import 'package:bwc_web1/provider/dark_mode_provider.dart';
-import 'package:bwc_web1/screens/main_page.dart';
 import 'package:bwc_web1/utils/constants/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -36,7 +36,8 @@ class MyApp extends StatelessWidget {
           ),
           themeMode:
               darkModeProvider.isDarkMode ? ThemeMode.dark : ThemeMode.light,
-          home: const MainPage(),
+          home: const SpotifyProfile(),
+          // home: const MainPage(),
           debugShowCheckedModeBanner: false,
         );
       }),

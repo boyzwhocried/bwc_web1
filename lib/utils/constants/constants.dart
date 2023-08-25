@@ -53,6 +53,17 @@ class Constants {
         .copyWith(fontSize: responsiveFontSizeSmall1);
   }
 
+  TextStyle responsiveTextStyleContacts(BuildContext context) {
+    double responsiveFontSizeSmall1 = responsiveFontSize(
+      context,
+      14,
+      scalingFactor: 0.15,
+    );
+    return DefaultTextStyle.of(context)
+        .style
+        .copyWith(fontSize: responsiveFontSizeSmall1);
+  }
+
   TextStyle responsiveTextStyleSubTitle(BuildContext context) {
     double responsivefontSizeMedium1 = responsiveFontSize(
       context,

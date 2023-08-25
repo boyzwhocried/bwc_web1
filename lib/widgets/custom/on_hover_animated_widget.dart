@@ -5,6 +5,7 @@ class OnHoverAniamatedWidget extends StatefulWidget {
   final Duration animationDuration;
   final EdgeInsetsGeometry paddingOnHover;
   final double rotationOnHover;
+  final bool rotateClockwise;
   final double scaleOnHover;
   final Curve animationCurve;
   final double? width;
@@ -16,8 +17,9 @@ class OnHoverAniamatedWidget extends StatefulWidget {
     super.key,
     required this.child,
     this.animationDuration = const Duration(milliseconds: 200),
-    this.paddingOnHover = const EdgeInsets.all(16.0),
+    this.paddingOnHover = const EdgeInsets.all(0),
     this.rotationOnHover = 0.0,
+    this.rotateClockwise = true,
     this.scaleOnHover = 1.0,
     this.animationCurve = Curves.easeInOut,
     this.width,
@@ -56,9 +58,13 @@ class OnHoverAniamatedWidgetState extends State<OnHoverAniamatedWidget>
       end: widget.paddingOnHover,
     ).animate(curvedAnimation);
 
+    double rotationEnd = widget.rotateClockwise
+        ? widget.rotationOnHover
+        : -widget.rotationOnHover;
+
     _rotationAnimation = Tween<double>(
       begin: 0.0,
-      end: widget.rotationOnHover,
+      end: rotationEnd,
     ).animate(curvedAnimation);
 
     _scaleAnimation = Tween<double>(
