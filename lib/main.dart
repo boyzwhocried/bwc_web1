@@ -1,4 +1,4 @@
-import 'package:bwc_web1/others/temp/spotify_profile.dart';
+import 'package:bwc_web1/others/temp/spotify/attemp2/spotify_widget_container.dart';
 import 'package:bwc_web1/provider/dark_mode_provider.dart';
 import 'package:bwc_web1/utils/constants/constants.dart';
 import 'package:flutter/material.dart';
@@ -36,8 +36,10 @@ class MyApp extends StatelessWidget {
           ),
           themeMode:
               darkModeProvider.isDarkMode ? ThemeMode.dark : ThemeMode.light,
-          home: const SpotifyProfile(),
+          // home: const SpotifyProfile(),
+          // home: const SpotifyProfileAPI(),
           // home: const MainPage(),
+          home: const SpotifyWidgetContainer(),
           debugShowCheckedModeBanner: false,
         );
       }),

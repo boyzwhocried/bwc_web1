@@ -3,6 +3,10 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
+
+//manually input token
+//only have basic authentication
+
 class SpotifyProfile extends StatefulWidget {
   const SpotifyProfile({super.key});
 
