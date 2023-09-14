@@ -1,6 +1,6 @@
 import 'dart:convert';
 
-import 'package:bwc_web1/others/temp/spotify/attemp2/models/spotify_currently_playing.dart';
+import 'package:bwc_web1/others/temp/spotify/attemp2/models/spotify_currently_playing_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 

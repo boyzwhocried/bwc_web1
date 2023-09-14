@@ -3,7 +3,7 @@ import 'package:bwc_web1/utils/responsive_font_size.dart';
 import 'package:bwc_web1/utils/responsive_padding_size.dart';
 import 'package:bwc_web1/utils/screen_dimensions.dart';
 import 'package:bwc_web1/widgets/custom/custom_animated_fade_in_widget.dart';
-import 'package:bwc_web1/widgets/custom/custom_animated_spin_widget.dart';
+import 'package:bwc_web1/widgets/custom/custom_animated_spin_transition_widget.dart';
 import 'package:flutter/material.dart';
 
 class AboutMeSection1 extends StatelessWidget {
@@ -24,7 +24,7 @@ class AboutMeSection1 extends StatelessWidget {
                     vertical: (7 / 100) * getScreenWidth(context)),
                 child: AnimatedFadeInWidget(
                   startDelay: const Duration(milliseconds: 500),
-                  child: AnimatedSpinWidget(
+                  child: AnimatedSpinTransitionWidget(
                     endRotationDegree: 420,
                     delayedStart: true,
                     delayDuration: const Duration(milliseconds: 500),

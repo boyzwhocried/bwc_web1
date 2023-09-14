@@ -41,7 +41,13 @@ dependencies:
   url_launcher: ^6.1.12
   font_awesome_flutter: ^10.5.0
   http: ^1.1.0
-  webview_flutter: ^4.2.3
+  spotify: ^0.11.0
+  flutter_dotenv: ^5.1.0
+  json_to_form: ^0.0.5
+  file_picker: ^5.5.0
+
+dependency_overrides:
+  http: ^0.13.3
 
 dev_dependencies:
   flutter_test:
@@ -70,6 +76,7 @@ flutter:
     - assets/images/fixed_lite.png
     - assets/images/profile.jpg
     - assets/json/dummy_spotify_data.json
+    - assets/json/dummy_spotify_data_multiple.json
   #   - images/a_dot_burr.jpeg
   #   - images/a_dot_ham.jpeg
 

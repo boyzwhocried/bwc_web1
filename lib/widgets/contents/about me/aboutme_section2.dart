@@ -41,7 +41,7 @@ class AboutMeSection2 extends StatelessWidget {
                       word: 'Manufacturing Polytechnic Bandung,',
                       colors: ColorGradientText.getColorList(
                         context,
-                         Constants().customColors.logoColors.polman,
+                        Constants().customColors.logoColors.polman,
                       ),
                       speed: const Duration(milliseconds: 100),
                       onTap: () {
@@ -52,7 +52,7 @@ class AboutMeSection2 extends StatelessWidget {
                       word: 'Binus University.',
                       colors: ColorGradientText.getColorList(
                         context,
-                         Constants().customColors.logoColors.binus,
+                        Constants().customColors.logoColors.binus,
                       ),
                       onTap: () {
                         urlLaunchInBrowser('https://binus.ac.id/');

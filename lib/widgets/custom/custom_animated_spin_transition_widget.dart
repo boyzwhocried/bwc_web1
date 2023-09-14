@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 
 enum SpinDirection { clockwise, counterclockwise }
 
-class AnimatedSpinWidget extends StatefulWidget {
+class AnimatedSpinTransitionWidget extends StatefulWidget {
   final Widget child;
   final bool infiniteSpin;
   final int spinCount;
@@ -16,7 +16,7 @@ class AnimatedSpinWidget extends StatefulWidget {
   final bool delayedStart;
   final Duration delayDuration;
 
-  const AnimatedSpinWidget({
+  const AnimatedSpinTransitionWidget({
     super.key,
     required this.child,
     this.infiniteSpin = true,
@@ -31,10 +31,10 @@ class AnimatedSpinWidget extends StatefulWidget {
   });
 
   @override
-  _AnimatedSpinWidgetState createState() => _AnimatedSpinWidgetState();
+  _AnimatedSpinTransitionWidgetState createState() => _AnimatedSpinTransitionWidgetState();
 }
 
-class _AnimatedSpinWidgetState extends State<AnimatedSpinWidget>
+class _AnimatedSpinTransitionWidgetState extends State<AnimatedSpinTransitionWidget>
     with SingleTickerProviderStateMixin {
   late AnimationController _controller;
   late Animation<double> _animation;
@@ -110,7 +110,7 @@ void usageExample() {
         title: const Text('Spinning Widget Example'),
       ),
       body: Center(
-        child: AnimatedSpinWidget(
+        child: AnimatedSpinTransitionWidget(
           infiniteSpin: true,
           spinDirection: SpinDirection.clockwise,
           startRotationDegree: 0.0,

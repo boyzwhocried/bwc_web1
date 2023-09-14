@@ -1,3 +1,4 @@
+import 'package:bwc_web1/widgets/spotify_track_widget.dart';
 import 'package:bwc_web1/utils/color_gradient.dart';
 import 'package:bwc_web1/utils/constants/constants.dart';
 import 'package:bwc_web1/utils/responsive_font_size.dart';
@@ -37,10 +38,19 @@ class Layout1 extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          const Column(
-            mainAxisAlignment: MainAxisAlignment.end,
+          Column(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text('© • 2023 • boyzwhocried'),
+              const SpotifyTrack(),
+              Text(
+                '© • 2023 • boyzwhocried',
+                style: TextStyle(
+                    fontSize: Constants()
+                            .responsiveTextStyleFooters(context)
+                            .fontSize! -
+                        2),
+              ),
             ],
           ),
           Column(
@@ -51,7 +61,7 @@ class Layout1 extends StatelessWidget {
                 'me elsewhere:',
                 style: TextStyle(
                     fontSize: Constants()
-                            .responsiveTextStyleContacts(context)
+                            .responsiveTextStyleFooters(context)
                             .fontSize! +
                         2),
               ),
@@ -65,7 +75,7 @@ class Layout1 extends StatelessWidget {
                     urlLaunchInBrowser(
                         'https://www.instagram.com/boyzwhocried/');
                   },
-                  fontStyle: Constants().responsiveTextStyleContacts(context),
+                  fontStyle: Constants().responsiveTextStyleFooters(context),
                   colors: ColorGradientText.getColorList(
                     context,
                     Constants().customColors.logoColors.instagram,
@@ -81,7 +91,7 @@ class Layout1 extends StatelessWidget {
                     urlLaunchInBrowser(
                         'https://www.instagram.com/daydreamers_mind/');
                   },
-                  fontStyle: Constants().responsiveTextStyleContacts(context),
+                  fontStyle: Constants().responsiveTextStyleFooters(context),
                   colors: ColorGradientText.getColorList(
                     context,
                     Constants().customColors.logoColors.instagram,
@@ -96,7 +106,7 @@ class Layout1 extends StatelessWidget {
                   onTap: () {
                     urlLaunchInBrowser('https://github.com/boyzwhocried');
                   },
-                  fontStyle: Constants().responsiveTextStyleContacts(context),
+                  fontStyle: Constants().responsiveTextStyleFooters(context),
                   colors: ColorGradientText.getColorList(
                     context,
                     Constants().customColors.logoColors.github,
@@ -112,7 +122,7 @@ class Layout1 extends StatelessWidget {
                     urlLaunchInBrowser(
                         'https://linkedin.com/in/verrel-mohammad-al-syoumi-77ba5a161');
                   },
-                  fontStyle: Constants().responsiveTextStyleContacts(context),
+                  fontStyle: Constants().responsiveTextStyleFooters(context),
                   colors: ColorGradientText.getColorList(
                     context,
                     Constants().customColors.logoColors.linkedin,
@@ -127,7 +137,7 @@ class Layout1 extends StatelessWidget {
                   onTap: () {
                     sendEmail('verrel.alsyoumi@gmail.com');
                   },
-                  fontStyle: Constants().responsiveTextStyleContacts(context),
+                  fontStyle: Constants().responsiveTextStyleFooters(context),
                   colors: ColorGradientText.getColorList(
                     context,
                     Constants().customColors.logoColors.google,
@@ -155,7 +165,7 @@ class Layout2 extends StatelessWidget {
             'me elsewhere:',
             style: TextStyle(
                 fontSize:
-                    Constants().responsiveTextStyleContacts(context).fontSize! +
+                    Constants().responsiveTextStyleFooters(context).fontSize! +
                         2),
           ),
           const SizedBox(height: 5),
@@ -171,7 +181,7 @@ class Layout2 extends StatelessWidget {
                     urlLaunchInBrowser(
                         'https://www.instagram.com/boyzwhocried/');
                   },
-                  fontStyle: Constants().responsiveTextStyleContacts(context),
+                  fontStyle: Constants().responsiveTextStyleFooters(context),
                   colors: ColorGradientText.getColorList(
                     context,
                     Constants().customColors.logoColors.instagram,
@@ -187,7 +197,7 @@ class Layout2 extends StatelessWidget {
                     urlLaunchInBrowser(
                         'https://www.instagram.com/daydreamers_mind/');
                   },
-                  fontStyle: Constants().responsiveTextStyleContacts(context),
+                  fontStyle: Constants().responsiveTextStyleFooters(context),
                   colors: ColorGradientText.getColorList(
                     context,
                     Constants().customColors.logoColors.instagram,
@@ -202,7 +212,7 @@ class Layout2 extends StatelessWidget {
                   onTap: () {
                     urlLaunchInBrowser('https://github.com/boyzwhocried');
                   },
-                  fontStyle: Constants().responsiveTextStyleContacts(context),
+                  fontStyle: Constants().responsiveTextStyleFooters(context),
                   colors: ColorGradientText.getColorList(
                     context,
                     Constants().customColors.logoColors.github,
@@ -218,7 +228,7 @@ class Layout2 extends StatelessWidget {
                     urlLaunchInBrowser(
                         'https://linkedin.com/in/verrel-mohammad-al-syoumi-77ba5a161');
                   },
-                  fontStyle: Constants().responsiveTextStyleContacts(context),
+                  fontStyle: Constants().responsiveTextStyleFooters(context),
                   colors: ColorGradientText.getColorList(
                     context,
                     Constants().customColors.logoColors.linkedin,
@@ -233,7 +243,7 @@ class Layout2 extends StatelessWidget {
                   onTap: () {
                     sendEmail('verrel.alsyoumi@gmail.com');
                   },
-                  fontStyle: Constants().responsiveTextStyleContacts(context),
+                  fontStyle: Constants().responsiveTextStyleFooters(context),
                   colors: ColorGradientText.getColorList(
                     context,
                     Constants().customColors.logoColors.google,
