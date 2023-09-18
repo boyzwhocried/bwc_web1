@@ -101,7 +101,7 @@ class SpotifyPlaylistWidgetState extends State<SpotifyPlaylistWidget> {
           });
 
           // ignore: avoid_print
-          print('Failed to fetch new data. Using cached data: ${cachedData}');
+          print('Failed to fetch new data. Using cached data: $cachedData');
         } else {
           // ignore: avoid_print
           print('Failed with status code: ${response.statusCode}');
