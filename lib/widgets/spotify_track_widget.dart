@@ -1,7 +1,7 @@
 import 'dart:convert';
 import 'dart:math';
 
-import 'package:bwc_web1/others/temp/spotify/attemp5/spotify_tracks_model.dart';
+import 'package:bwc_web1/widgets/custom/spotify/tracks_with_dummy_data/spotify_tracks_model.dart';
 import 'package:bwc_web1/utils/constants/constants.dart';
 import 'package:bwc_web1/widgets/custom/custom_continuous_spinning_widget.dart';
 import 'package:flutter/material.dart';
@@ -39,7 +39,10 @@ class _SpotifyTrackState extends State<SpotifyTrack> {
 
   @override
   Widget build(BuildContext context) {
-    final track = spotifyTracks?[next(0, spotifyTracks?.length ?? 0)];
+    // final track = spotifyTracks?[next(0, spotifyTracks?.length ?? 0)];
+    final track = spotifyTracks!.isNotEmpty
+      ? spotifyTracks![next(0, spotifyTracks!.length)]
+      : null;
     return Container(
       width: 315,
       padding: EdgeInsets.all(

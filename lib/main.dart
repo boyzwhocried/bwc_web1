@@ -1,7 +1,6 @@
 // ignore_for_file: unused_import
 
-import 'package:bwc_web1/others/temp/postman.dart';
-import 'package:bwc_web1/others/temp/spotify/attemp5/sotify_track_list.dart';
+import 'package:bwc_web1/widgets/custom/spotify/tracks_with_dummy_data/sotify_track_list.dart';
 import 'package:bwc_web1/others/temp/test.dart';
 import 'package:bwc_web1/provider/dark_mode_provider.dart';
 import 'package:bwc_web1/screens/main_page.dart';

@@ -1,4 +1,4 @@
-import 'package:bwc_web1/widgets/spotify_track_widget.dart';
+import 'package:bwc_web1/widgets/custom/spotify/playlist_from_server/spotify_playlist_widget.dart';
 import 'package:bwc_web1/utils/color_gradient.dart';
 import 'package:bwc_web1/utils/constants/constants.dart';
 import 'package:bwc_web1/utils/responsive_font_size.dart';
@@ -42,7 +42,12 @@ class Layout1 extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const SpotifyTrack(),
+              // const SpotifyTrack(),
+
+              const OnHoverAniamatedWidget(
+                  scaleOnHover: 1.03, child: SpotifyPlaylistWidget()),
+              // const SpotifyPlaylistWidget6(),
+              
               Text(
                 '© • 2023 • boyzwhocried',
                 style: TextStyle(
