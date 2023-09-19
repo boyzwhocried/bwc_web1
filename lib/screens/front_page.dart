@@ -19,6 +19,7 @@ class FrontPage extends StatelessWidget {
       child: Padding(
         padding: EdgeInsets.all(responsivePaddingSize(context, 12)),
         child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
             const IntroductionSection(),
             Padding(
@@ -27,7 +28,6 @@ class FrontPage extends StatelessWidget {
               ),
               child: ExploreButton(updateCallback: updateCallback),
             ),
-            
           ],
         ),
       ),

@@ -47,7 +47,7 @@ class Layout1 extends StatelessWidget {
               const OnHoverAniamatedWidget(
                   scaleOnHover: 1.03, child: SpotifyPlaylistWidget()),
               // const SpotifyPlaylistWidget6(),
-              
+
               Text(
                 '© • 2023 • boyzwhocried',
                 style: TextStyle(

@@ -1,8 +1,10 @@
 import 'dart:convert';
 import 'dart:math';
 import 'package:bwc_web1/utils/constants/constants.dart';
+import 'package:bwc_web1/utils/responsive_font_size.dart';
 import 'package:bwc_web1/utils/url_launcher.dart';
 import 'package:bwc_web1/widgets/custom/custom_continuous_spinning_widget.dart';
+import 'package:bwc_web1/widgets/custom/custom_marquee.dart';
 import 'package:http/http.dart' as http;
 import 'package:bwc_web1/widgets/custom/spotify/playlist_from_server/spotify_playlist_model.dart';
 import 'package:flutter/material.dart';
@@ -131,83 +133,77 @@ class SpotifyPlaylistWidgetState extends State<SpotifyPlaylistWidget> {
         }
       },
       icon: Container(
-        width: 315,
+        width: responsiveFontSize(
+          context,
+          200,
+          maxFontSize: 315,
+          scalingFactor: 0.1,
+        ),
         padding: EdgeInsets.all(
-          Constants().responsiveTextStyleFooters(context).fontSize! - 10,
+          responsiveFontSize(context, 6, scalingFactor: 0.02),
         ),
         decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(50),
+          borderRadius: BorderRadius.circular(
+              responsiveFontSize(context, 50, scalingFactor: 0.05)),
           color: Colors.white24,
         ),
         child: Row(
           children: [
-            Flexible(
-              flex: 1,
-              child: ContinuousSpinWidget(
-                durationPerRotation: const Duration(seconds: 5),
-                child: currentSong?.track?.album?.images != null &&
-                        currentSong!.track!.album!.images!.isNotEmpty
-                    ? ClipOval(
-                        child: Image.network(
-                          currentSong!.track!.album!.images![0].url!,
-                          width: 60,
-                          height: 60,
-                          fit: BoxFit.cover,
-                        ),
-                      )
-                    : ClipOval(
-                        child: Container(
-                            decoration: BoxDecoration(
-                              color: Constants()
-                                  .customColors
-                                  .mainThemeColor
-                                  .greenLime
-                                  .withOpacity(0.2),
-                            ),
-                            width: 60,
-                            height: 60,
-                            child: const Icon(Icons.music_note)),
+            ContinuousSpinWidget(
+              durationPerRotation: const Duration(seconds: 5),
+              child: currentSong?.track?.album?.images != null &&
+                      currentSong!.track!.album!.images!.isNotEmpty
+                  ? ClipOval(
+                      child: Image.network(
+                        currentSong!.track!.album!.images![0].url!,
+                        width: responsiveFontSize(context, 60),
+                        height: responsiveFontSize(context, 60),
+                        fit: BoxFit.cover,
                       ),
-              ),
+                    )
+                  : ClipOval(
+                      child: Container(
+                          decoration: BoxDecoration(
+                            color: Constants()
+                                .customColors
+                                .mainThemeColor
+                                .greenLime
+                                .withOpacity(0.2),
+                          ),
+                          width: responsiveFontSize(context, 60),
+                          height: responsiveFontSize(context, 60),
+                          child: const Icon(Icons.music_note)),
+                    ),
             ),
             SizedBox(
               width:
-                  Constants().responsiveTextStyleFooters(context).fontSize! - 2,
+                  Constants().responsiveTextStyleFooters(context).fontSize! - 4,
             ),
-            Flexible(
-              flex: 3,
+            Expanded(
               child: Column(
-                mainAxisSize: MainAxisSize.max,
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(
-                    currentSong?.track?.name ?? 'Unknown',
-                    style: TextStyle(
-                      fontSize: Constants()
-                              .responsiveTextStyleFooters(context)
-                              .fontSize! -
-                          1,
-                    ),
-                    maxLines: 1,
-                    overflow: TextOverflow.ellipsis,
-                  ),
-                  Text(
-                    'by ${currentSong?.track?.artists?.map((a) => a.name).join(', ') ?? 'Unknown Artist'}',
+                  CustomMarquee(
+                    text: '${currentSong?.track?.name ?? 'Unknown'}  ',
                     style: TextStyle(
                       fontSize: Constants()
                               .responsiveTextStyleFooters(context)
                               .fontSize! -
                           2,
                     ),
-                    maxLines: 1,
-                    overflow: TextOverflow.ellipsis,
                   ),
-                  // CustomMarquee(
-                  //   text: 'aksjdhfklasjdhfkjashdfkjahsdflk',
-                  //   maxWidth: 196,
-                    
-                  // ),
+                  const SizedBox(height: 3),
+                  CustomMarquee(
+                    text:
+                        'by ${currentSong?.track?.artists?.map((a) => a.name).join(', ') ?? 'Unknown Artist'}  ',
+                    style: TextStyle(
+                      fontSize: Constants()
+                              .responsiveTextStyleFooters(context)
+                              .fontSize! -
+                          2,
+                    ),
+                  ),
                 ],
               ),
             ),

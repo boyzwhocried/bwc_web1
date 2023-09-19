@@ -44,7 +44,7 @@ class CustomMarquee extends StatefulWidget {
   double velocity = 50.0;
   Duration startAfter = Duration.zero;
   Duration pauseAfterRound =
-      const Duration(seconds: 1); // Pause duration after each round
+      const Duration(seconds: 2); // Pause duration after each round
   bool showFadingOnlyWhenScrolling = true;
   double fadingEdgeStartFraction = 0.0;
   double fadingEdgeEndFraction = 0.0;
@@ -68,7 +68,7 @@ class CustomMarquee extends StatefulWidget {
     this.blankSpace = 0.0,
     this.velocity = 50.0,
     this.startAfter = Duration.zero,
-    this.pauseAfterRound = const Duration(seconds: 1),
+    this.pauseAfterRound = const Duration(seconds: 2),
     this.showFadingOnlyWhenScrolling = true,
     this.fadingEdgeStartFraction = 0.0,
     this.fadingEdgeEndFraction = 0.0,
@@ -88,51 +88,75 @@ class CustomMarquee extends StatefulWidget {
 class _CustomMarqueeState extends State<CustomMarquee> {
   @override
   Widget build(BuildContext context) {
-    final textToDisplay = widget.text.split('');
-    bool isOverflowing = isTextOverflowing(
-      widget.text,
-      widget.style ?? const TextStyle(), // Provide your desired text style
-      widget.maxWidth ?? double.infinity, // Specify your maximum width
-      context, // Provide the BuildContext
-    );
-
-    if (isOverflowing) {
-      print('overflowing');
-      print(double.infinity);
-      return SizedBox(
-        height: calculateTextHeight(
-            widget.text, widget.style ?? const TextStyle(), double.infinity),
-        width: widget.maxWidth ?? double.infinity,
-        child: Marquee(
-          text: textToDisplay.join(''), // Join the text characters with space
-          style: widget.style,
-          textScaleFactor: widget.textScaleFactor,
-          textDirection: widget.textDirection,
-          scrollAxis: widget.scrollAxis,
-          crossAxisAlignment: widget.crossAxisAlignment,
-          blankSpace: widget.blankSpace,
-          velocity: widget.velocity,
-          startAfter: widget.startAfter,
-          pauseAfterRound: widget.pauseAfterRound,
-          showFadingOnlyWhenScrolling: widget.showFadingOnlyWhenScrolling,
-          fadingEdgeStartFraction: widget.fadingEdgeStartFraction,
-          fadingEdgeEndFraction: widget.fadingEdgeEndFraction,
-          numberOfRounds: widget.numberOfRounds,
-          startPadding: widget.startPadding,
-          accelerationDuration: widget.accelerationDuration,
-          accelerationCurve: widget.accelerationCurve,
-          decelerationDuration: widget.decelerationDuration,
-          decelerationCurve: widget.decelerationCurve,
-          onDone: widget.onDone,
-        ),
-      );
-    } else {
-      print('not overflowing');
-      print(double.infinity);
-      return Text(
+    return LayoutBuilder(builder: (context, constraints) {
+      final textToDisplay = widget.text.split('');
+      bool isOverflowing = isTextOverflowing(
         widget.text,
-        style: widget.style,
+        widget.style ?? const TextStyle(), // Provide your desired text style
+        widget.maxWidth ?? constraints.maxWidth, // Specify your maximum width
+        context, // Provide the BuildContext
       );
-    }
+
+      if (isOverflowing) {
+        return SizedBox(
+          height: calculateTextHeight(
+              widget.text, widget.style ?? const TextStyle(), double.infinity),
+          width: widget.maxWidth ?? constraints.maxWidth,
+          child: Marquee(
+            text: textToDisplay.join(''), // Join the text characters with space
+            style: widget.style,
+            textScaleFactor: widget.textScaleFactor,
+            textDirection: widget.textDirection,
+            scrollAxis: widget.scrollAxis,
+            crossAxisAlignment: widget.crossAxisAlignment,
+            blankSpace: widget.blankSpace,
+            velocity: widget.velocity,
+            startAfter: widget.startAfter,
+            pauseAfterRound: widget.pauseAfterRound,
+            showFadingOnlyWhenScrolling: widget.showFadingOnlyWhenScrolling,
+            fadingEdgeStartFraction: widget.fadingEdgeStartFraction,
+            fadingEdgeEndFraction: widget.fadingEdgeEndFraction,
+            numberOfRounds: widget.numberOfRounds,
+            startPadding: widget.startPadding,
+            accelerationDuration: widget.accelerationDuration,
+            accelerationCurve: widget.accelerationCurve,
+            decelerationDuration: widget.decelerationDuration,
+            decelerationCurve: widget.decelerationCurve,
+            onDone: widget.onDone,
+          ),
+        );
+      } else {
+        return Text(
+          widget.text,
+          style: widget.style,
+          maxLines: 1,
+          overflow: TextOverflow.ellipsis,
+        );
+      }
+    });
+  }
+}
+
+// USAGE EXAMPLE **REQUIRING A WARP OF LAYOUTBUILDER
+class ExampleUsageCustomMarquee extends StatelessWidget {
+  const ExampleUsageCustomMarquee({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      mainAxisSize: MainAxisSize.max,
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        LayoutBuilder(
+          builder: (context, constraints) {
+            return CustomMarquee(
+              text: 'aksjdhfklasjdhfkjashdfkjahsdflafsdfasdfk',
+              maxWidth: constraints.maxWidth,
+            );
+          },
+        ),
+      ],
+    );
   }
 }
