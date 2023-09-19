@@ -7,6 +7,7 @@ import 'package:bwc_web1/utils/responsive_font_size.dart';
 import 'package:bwc_web1/utils/responsive_padding_size.dart';
 import 'package:bwc_web1/widgets/contents/introduction.dart';
 import 'package:bwc_web1/widgets/custom/custom_animated_fade_in_text.dart';
+import 'package:bwc_web1/widgets/custom/custom_animated_fade_in_widget.dart';
 import 'package:bwc_web1/widgets/custom/smooth_gradient_background.dart';
 import 'package:bwc_web1/utils/screen_dimensions.dart';
 import 'package:bwc_web1/widgets/dark_mode_toggle_button.dart';
@@ -92,34 +93,38 @@ class _MainPageState extends State<MainPage>
               ),
               child: Row(
                 children: [
-                  TextButton(
-                    onPressed: () {
-                      switchPage(1);
-                    },
-                    child: const AnimatedFadeInText(
-                      text: 'explore',
-                      textStyle: TextStyle(
-                        letterSpacing: 3.0,
-                        fontSize: 18,
+                  AnimatedFadeInWidget(
+                    slideDirection: SlideDirection.topToBottom,
+                    curveType: Curves.easeInOutCubic,
+                    startDelay: const Duration(milliseconds: 200),
+                    child: TextButton(
+                      onPressed: () {
+                        switchPage(1);
+                      },
+                      child: const Text(
+                        'explore',
+                        style: TextStyle(
+                          letterSpacing: 3.0,
+                          fontSize: 18,
+                        ),
                       ),
-                      slideDirection: TextSlideDirection.topToBottom,
-                      curveType: Curves.easeInOutCubic,
-                      delay: Duration(milliseconds: 200),
                     ),
                   ),
-                  TextButton(
-                    onPressed: () {
-                      switchPage(2);
-                    },
-                    child: const AnimatedFadeInText(
-                      text: 'about',
-                      textStyle: TextStyle(
-                        letterSpacing: 3.0,
-                        fontSize: 18,
+                  AnimatedFadeInWidget(
+                    slideDirection: SlideDirection.topToBottom,
+                    curveType: Curves.easeInOutCubic,
+                    startDelay: const Duration(milliseconds: 400),
+                    child: TextButton(
+                      onPressed: () {
+                        switchPage(2);
+                      },
+                      child: const Text(
+                        'about',
+                        style: TextStyle(
+                          letterSpacing: 3.0,
+                          fontSize: 18,
+                        ),
                       ),
-                      slideDirection: TextSlideDirection.topToBottom,
-                      curveType: Curves.easeInOutCubic,
-                      delay: Duration(milliseconds: 400),
                     ),
                   ),
                 ],
