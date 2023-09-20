@@ -100,7 +100,9 @@ class _CustomMarqueeState extends State<CustomMarquee> {
       if (isOverflowing) {
         return SizedBox(
           height: calculateTextHeight(
-              widget.text, widget.style ?? const TextStyle(), double.infinity),
+              widget.text,
+              widget.style ?? const TextStyle(),
+              widget.maxWidth ?? constraints.maxWidth),
           width: widget.maxWidth ?? constraints.maxWidth,
           child: Marquee(
             text: textToDisplay.join(''), // Join the text characters with space

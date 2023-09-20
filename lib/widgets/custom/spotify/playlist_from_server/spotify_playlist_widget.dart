@@ -22,6 +22,9 @@ class SpotifyPlaylistWidgetState extends State<SpotifyPlaylistWidget> {
   final random = Random();
   Items? currentSong; // Store the currently displayed song
 
+  final String url = 'http://localhost:3000';
+  final String endpointGetPlaylist = '/get-playlist';
+
   int next(int min, int max) => min + random.nextInt(max - min);
 
   @override
@@ -62,8 +65,7 @@ class SpotifyPlaylistWidgetState extends State<SpotifyPlaylistWidget> {
       }
 
       // Fetch new data from the server
-      final response =
-          await http.get(Uri.parse('http://localhost:3000/get-playlist'));
+      final response = await http.get(Uri.parse('$url$endpointGetPlaylist'));
       if (response.statusCode == 200) {
         final jsonData = json.decode(response.body);
         final List<dynamic> items = jsonData['tracks']['items'];
