@@ -42,12 +42,10 @@ class Layout1 extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              // const SpotifyTrack(),
-
               const OnHoverAniamatedWidget(
-                  scaleOnHover: 1.03, child: SpotifyPlaylistWidget()),
-              // const SpotifyPlaylistWidget6(),
-
+                scaleOnHover: 1.03,
+                child: SpotifyPlaylistWidget(),
+              ),
               Text(
                 '© • 2023 • boyzwhocried',
                 style: TextStyle(

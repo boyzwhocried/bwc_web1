@@ -101,11 +101,15 @@ class _MainPageState extends State<MainPage>
                       onPressed: () {
                         switchPage(1);
                       },
-                      child: const Text(
+                      child: Text(
                         'explore',
                         style: TextStyle(
                           letterSpacing: 3.0,
-                          fontSize: 18,
+                          fontSize: responsiveFontSize(
+                            context,
+                            16,
+                            scalingFactor: 0.2,
+                          ),
                         ),
                       ),
                     ),
@@ -118,11 +122,15 @@ class _MainPageState extends State<MainPage>
                       onPressed: () {
                         switchPage(2);
                       },
-                      child: const Text(
+                      child: Text(
                         'about',
                         style: TextStyle(
                           letterSpacing: 3.0,
-                          fontSize: 18,
+                          fontSize: responsiveFontSize(
+                            context,
+                            16,
+                            scalingFactor: 0.2,
+                          ),
                         ),
                       ),
                     ),

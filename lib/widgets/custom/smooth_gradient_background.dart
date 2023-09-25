@@ -41,6 +41,7 @@ class _SmoothGradientBackgroundState extends State<SmoothGradientBackground> {
   void initState() {
     super.initState();
     startGradientAnimation();
+    _startImageChangeTimer();
   }
 
   void startGradientAnimation() {
@@ -66,6 +67,40 @@ class _SmoothGradientBackgroundState extends State<SmoothGradientBackground> {
     );
   }
 
+  int _currentImageIndex = 0; // Index to keep track of the current image
+
+  // List of image paths that you want to cycle through
+  final List<String> _imagePaths = [
+    'assets/images/textures/grainy_texture0.jpg',
+    'assets/images/textures/grainy_texture1.jpg',
+    'assets/images/textures/grainy_texture2.jpg',
+    'assets/images/textures/grainy_texture3.jpg',
+    // Add more image paths as needed
+  ];
+
+  // Create a timer that triggers the image change every second
+  Timer? _imageChangeTimer;
+
+  @override
+  void dispose() {
+    // Cancel the timer when the widget is disposed to prevent memory leaks
+    _imageChangeTimer?.cancel();
+    super.dispose();
+  }
+
+  void _startImageChangeTimer() {
+    const fps = 24; //Adjust the fps flickering effect
+    const duration =
+        Duration(milliseconds: 1000 ~/ fps); // Change image every second
+
+    _imageChangeTimer = Timer.periodic(duration, (timer) {
+      // Update the current image index, wrapping around to the first image if needed
+      setState(() {
+        _currentImageIndex = (_currentImageIndex + 1) % _imagePaths.length;
+      });
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     final gradientBegin =
@@ -79,6 +114,8 @@ class _SmoothGradientBackgroundState extends State<SmoothGradientBackground> {
 
     return AnimatedContainer(
       duration: widget.duration,
+      width: double.infinity, // Set the width to match the screen width
+      height: double.infinity, // Set the height to match the screen height
       decoration: BoxDecoration(
         gradient: LinearGradient(
           begin: gradientBegin,
@@ -89,7 +126,24 @@ class _SmoothGradientBackgroundState extends State<SmoothGradientBackground> {
           ],
         ),
       ),
-      child: widget.child,
+      child: Stack(
+        children: [
+          // Add your image texture as a background
+          SizedBox(
+            width: double.infinity, // Set the width to match the screen width
+            height:
+                double.infinity, // Set the height to match the screen height
+            child: Image.asset(
+              // 'assets/images/textures/grainy_texture.jpg',
+              _imagePaths[_currentImageIndex],
+              fit: BoxFit.cover,
+              opacity: const AlwaysStoppedAnimation<double>(0.1),
+            ),
+          ),
+          // Add your other child widget (content) on top of the image texture
+          widget.child,
+        ],
+      ),
     );
   }
 }

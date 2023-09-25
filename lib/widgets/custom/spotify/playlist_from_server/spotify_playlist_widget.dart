@@ -186,19 +186,23 @@ class SpotifyPlaylistWidgetState extends State<SpotifyPlaylistWidget> {
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  CustomMarquee(
-                    text: '${currentSong?.track?.name ?? 'Unknown'}  ',
+                  Text(
+                    ' on repeat:',
                     style: TextStyle(
-                      fontSize: Constants()
-                              .responsiveTextStyleFooters(context)
-                              .fontSize! -
-                          2,
-                    ),
+                        color: Theme.of(context)
+                            .textTheme
+                            .bodyLarge!
+                            .color!
+                            .withOpacity(0.5),
+                        fontWeight: FontWeight.bold,
+                        fontSize: Constants()
+                                .responsiveTextStyleFooters(context)
+                                .fontSize! -
+                            2),
                   ),
-                  const SizedBox(height: 3),
                   CustomMarquee(
                     text:
-                        'by ${currentSong?.track?.artists?.map((a) => a.name).join(', ') ?? 'Unknown Artist'}  ',
+                        '"${currentSong?.track?.name ?? 'Unknown'}" by ${currentSong?.track?.artists?.map((a) => a.name).join(', ') ?? 'Unknown Artist'}',
                     style: TextStyle(
                       fontSize: Constants()
                               .responsiveTextStyleFooters(context)

@@ -42,9 +42,9 @@ class CustomMarquee extends StatefulWidget {
   CrossAxisAlignment crossAxisAlignment = CrossAxisAlignment.center;
   double blankSpace = 0.0;
   double velocity = 50.0;
-  Duration startAfter = Duration.zero;
+  Duration startAfter = const Duration(seconds: 3);
   Duration pauseAfterRound =
-      const Duration(seconds: 2); // Pause duration after each round
+      const Duration(seconds: 3); // Pause duration after each round
   bool showFadingOnlyWhenScrolling = true;
   double fadingEdgeStartFraction = 0.0;
   double fadingEdgeEndFraction = 0.0;
@@ -91,7 +91,7 @@ class _CustomMarqueeState extends State<CustomMarquee> {
     return LayoutBuilder(builder: (context, constraints) {
       final textToDisplay = widget.text.split('');
       bool isOverflowing = isTextOverflowing(
-        widget.text,
+        '${widget.text}aaa',
         widget.style ?? const TextStyle(), // Provide your desired text style
         widget.maxWidth ?? constraints.maxWidth, // Specify your maximum width
         context, // Provide the BuildContext
@@ -105,7 +105,8 @@ class _CustomMarqueeState extends State<CustomMarquee> {
               widget.maxWidth ?? constraints.maxWidth),
           width: widget.maxWidth ?? constraints.maxWidth,
           child: Marquee(
-            text: textToDisplay.join(''), // Join the text characters with space
+            text:
+                '${textToDisplay.join('')}  -  ', // Join the text characters with space
             style: widget.style,
             textScaleFactor: widget.textScaleFactor,
             textDirection: widget.textDirection,
@@ -132,7 +133,8 @@ class _CustomMarqueeState extends State<CustomMarquee> {
           widget.text,
           style: widget.style,
           maxLines: 1,
-          overflow: TextOverflow.ellipsis,
+          overflow: TextOverflow.visible,
+          softWrap: false,
         );
       }
     });

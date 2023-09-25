@@ -77,7 +77,10 @@ flutter:
     - assets/images/fixed.png
     - assets/images/fixed_lite.png
     - assets/images/profile.jpg
-    - assets/images/textures/grainy_texture.jpg
+    - assets/images/textures/grainy_texture0.jpg
+    - assets/images/textures/grainy_texture1.jpg
+    - assets/images/textures/grainy_texture2.jpg
+    - assets/images/textures/grainy_texture3.jpg
     - assets/json/dummy_spotify_data.json
     - assets/json/dummy_spotify_data_multiple.json
   #   - images/a_dot_burr.jpeg
