@@ -7,6 +7,7 @@ import 'package:bwc_web1/utils/screen_dimensions.dart';
 import 'package:bwc_web1/utils/url_launcher.dart';
 import 'package:bwc_web1/widgets/custom/on_hover_animated_text.dart';
 import 'package:bwc_web1/widgets/custom/on_hover_animated_widget.dart';
+import 'package:bwc_web1/widgets/custom/spotify/playlist_from_server/spotify_playlist_widget_small.dart';
 import 'package:flutter/material.dart';
 
 class AboutMeFooter extends StatelessWidget {
@@ -20,12 +21,13 @@ class AboutMeFooter extends StatelessWidget {
         bottom: responsiveFontSize(context, 1),
       ),
       child: getDeviceType(context) != DeviceType.phone
-          ? const Layout1()
-          : const Layout2(),
+          ? const Layout1() /* Desktop & Tablet layout */
+          : const Layout2() /* Phone layout */,
     );
   }
 }
 
+// Desktop & Tablet layout
 class Layout1 extends StatelessWidget {
   const Layout1({
     super.key,
@@ -155,15 +157,21 @@ class Layout1 extends StatelessWidget {
   }
 }
 
+// Phone layout
 class Layout2 extends StatelessWidget {
   const Layout2({super.key});
 
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: responsiveFontSize(context, 220),
+      height: responsiveFontSize(context, 320),
       child: Column(
         children: [
+          const OnHoverAniamatedWidget(
+            scaleOnHover: 1.03,
+            child: SpotifyPlaylistWidgetSmall(),
+          ),
+          const Spacer(),
           Text(
             'me elsewhere:',
             style: TextStyle(

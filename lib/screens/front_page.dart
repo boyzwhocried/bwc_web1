@@ -28,6 +28,7 @@ class FrontPage extends StatelessWidget {
               ),
               child: ExploreButton(updateCallback: updateCallback),
             ),
+            
           ],
         ),
       ),
