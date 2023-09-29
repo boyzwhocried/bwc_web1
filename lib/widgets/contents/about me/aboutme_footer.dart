@@ -1,4 +1,3 @@
-import 'package:bwc_web1/widgets/custom/spotify/playlist_from_server/spotify_playlist_widget.dart';
 import 'package:bwc_web1/utils/color_gradient.dart';
 import 'package:bwc_web1/utils/constants/constants.dart';
 import 'package:bwc_web1/utils/responsive_font_size.dart';
@@ -7,7 +6,7 @@ import 'package:bwc_web1/utils/screen_dimensions.dart';
 import 'package:bwc_web1/utils/url_launcher.dart';
 import 'package:bwc_web1/widgets/custom/on_hover_animated_text.dart';
 import 'package:bwc_web1/widgets/custom/on_hover_animated_widget.dart';
-import 'package:bwc_web1/widgets/custom/spotify/playlist_from_server/spotify_playlist_widget_small.dart';
+import 'package:bwc_web1/widgets/custom/spotify/playlist_from_server/spotify_playlist_widget.dart';
 import 'package:flutter/material.dart';
 
 class AboutMeFooter extends StatelessWidget {
@@ -46,7 +45,7 @@ class Layout1 extends StatelessWidget {
             children: [
               const OnHoverAniamatedWidget(
                 scaleOnHover: 1.03,
-                child: SpotifyPlaylistWidget(),
+                child: SpotifyPlaylistWidget(isSmall: false),
               ),
               Text(
                 '© • 2023 • boyzwhocried',
@@ -149,6 +148,21 @@ class Layout1 extends StatelessWidget {
                   ),
                 ),
               ),
+              OnHoverAniamatedWidget(
+                scaleOnHover: 1.05,
+                child: OnHoverAnimatedText(
+                  speed: const Duration(milliseconds: 500),
+                  text: 'CV',
+                  onTap: () {
+                    urlLaunchInBrowser('https://resume.io/r/7yCEg6KQo');
+                  },
+                  fontStyle: Constants().responsiveTextStyleFooters(context),
+                  colors: ColorGradientText.getColorList(
+                    context,
+                    [Constants().customColors.mainThemeColor.greenSage],
+                  ),
+                ),
+              ),
             ],
           ),
         ],
@@ -169,7 +183,7 @@ class Layout2 extends StatelessWidget {
         children: [
           const OnHoverAniamatedWidget(
             scaleOnHover: 1.03,
-            child: SpotifyPlaylistWidgetSmall(),
+            child: SpotifyPlaylistWidget(isSmall: true),
           ),
           const Spacer(),
           Text(
@@ -258,6 +272,21 @@ class Layout2 extends StatelessWidget {
                   colors: ColorGradientText.getColorList(
                     context,
                     Constants().customColors.logoColors.google,
+                  ),
+                ),
+              ),
+              OnHoverAniamatedWidget(
+                scaleOnHover: 1.05,
+                child: OnHoverAnimatedText(
+                  speed: const Duration(milliseconds: 500),
+                  text: 'CV',
+                  onTap: () {
+                    urlLaunchInBrowser('https://resume.io/r/7yCEg6KQo');
+                  },
+                  fontStyle: Constants().responsiveTextStyleFooters(context),
+                  colors: ColorGradientText.getColorList(
+                    context,
+                    [Constants().customColors.mainThemeColor.greenSage],
                   ),
                 ),
               ),

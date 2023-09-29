@@ -1,17 +1,22 @@
 import 'dart:convert';
 import 'dart:math';
+import 'dart:ui';
 import 'package:bwc_web1/utils/constants/constants.dart';
 import 'package:bwc_web1/utils/responsive_font_size.dart';
 import 'package:bwc_web1/utils/url_launcher.dart';
+import 'package:bwc_web1/widgets/custom/custom_arc_text_widget.dart';
 import 'package:bwc_web1/widgets/custom/custom_continuous_spinning_widget.dart';
 import 'package:bwc_web1/widgets/custom/custom_marquee.dart';
-import 'package:http/http.dart' as http;
 import 'package:bwc_web1/widgets/custom/spotify/playlist_from_server/spotify_playlist_model.dart';
+import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class SpotifyPlaylistWidget extends StatefulWidget {
-  const SpotifyPlaylistWidget({Key? key}) : super(key: key);
+  final bool isSmall;
+
+  const SpotifyPlaylistWidget({Key? key, required this.isSmall})
+      : super(key: key);
 
   @override
   SpotifyPlaylistWidgetState createState() => SpotifyPlaylistWidgetState();
@@ -133,93 +138,190 @@ class SpotifyPlaylistWidgetState extends State<SpotifyPlaylistWidget> {
           print('Error fetching data: $e');
         }
       },
-      icon: Container(
-        width: responsiveFontSize(
-          context,
-          200,
-          maxFontSize: 315,
-          scalingFactor: 0.1,
-        ),
-        padding: EdgeInsets.all(
-          responsiveFontSize(context, 6, scalingFactor: 0.02),
-        ),
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(
-              responsiveFontSize(context, 50, scalingFactor: 0.05)),
-          color: Colors.white24,
-        ),
-        child: Row(
-          children: [
-            ContinuousSpinWidget(
-              durationPerRotation: const Duration(seconds: 5),
-              child: currentSong?.track?.album?.images != null &&
-                      currentSong!.track!.album!.images!.isNotEmpty
-                  ? ClipOval(
-                      child: Image.network(
-                        currentSong!.track!.album!.images![0].url!,
-                        width: responsiveFontSize(context, 60),
-                        height: responsiveFontSize(context, 60),
-                        fit: BoxFit.cover,
-                      ),
-                    )
-                  : ClipOval(
-                      child: Container(
-                        decoration: BoxDecoration(
-                          color: Constants()
-                              .customColors
-                              .mainThemeColor
-                              .greenLime
-                              .withOpacity(0.2),
-                        ),
-                        width: responsiveFontSize(context, 60),
-                        height: responsiveFontSize(context, 60),
-                        child: const Icon(Icons.music_note),
-                      ),
+      icon: widget.isSmall ? _buildSmallWidget() : _buildRegularWidget(),
+    );
+  }
+
+  Widget _buildRegularWidget() {
+    return Container(
+      width: responsiveFontSize(
+        context,
+        200,
+        maxFontSize: 315,
+        scalingFactor: 0.1,
+      ),
+      padding: EdgeInsets.all(
+        responsiveFontSize(context, 6, scalingFactor: 0.02),
+      ),
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(
+            responsiveFontSize(context, 50, scalingFactor: 0.05)),
+        color: Colors.white24,
+      ),
+      child: Row(
+        children: [
+          ContinuousSpinWidget(
+            durationPerRotation: const Duration(seconds: 5),
+            child: currentSong?.track?.album?.images != null &&
+                    currentSong!.track!.album!.images!.isNotEmpty
+                ? ClipOval(
+                    child: Image.network(
+                      currentSong!.track!.album!.images![0].url!,
+                      width: responsiveFontSize(context, 60),
+                      height: responsiveFontSize(context, 60),
+                      fit: BoxFit.cover,
                     ),
-            ),
-            SizedBox(
-              width:
-                  Constants().responsiveTextStyleFooters(context).fontSize! - 4,
-            ),
-            Expanded(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    '• on repeat:',
-                    style: TextStyle(
-                        color: Theme.of(context)
-                            .textTheme
-                            .bodyLarge!
-                            .color!
-                            .withOpacity(0.5),
-                        fontWeight: FontWeight.bold,
-                        fontSize: Constants()
-                                .responsiveTextStyleFooters(context)
-                                .fontSize! -
-                            2),
+                  )
+                : ClipOval(
+                    child: Container(
+                      decoration: BoxDecoration(
+                        color: Constants()
+                            .customColors
+                            .mainThemeColor
+                            .greenLime
+                            .withOpacity(0.2),
+                      ),
+                      width: responsiveFontSize(context, 60),
+                      height: responsiveFontSize(context, 60),
+                      child: const Icon(Icons.music_note),
+                    ),
                   ),
-                  CustomMarquee(
-                    text:
-                        '"${currentSong?.track?.name ?? 'Unknown'}" by ${currentSong?.track?.artists?.map((a) => a.name).join(', ') ?? 'Unknown Artist'}',
-                    style: TextStyle(
+          ),
+          SizedBox(
+            width:
+                Constants().responsiveTextStyleFooters(context).fontSize! - 4,
+          ),
+          Expanded(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  '• on repeat:',
+                  style: TextStyle(
+                      color: Theme.of(context)
+                          .textTheme
+                          .bodyLarge!
+                          .color!
+                          .withOpacity(0.5),
+                      fontWeight: FontWeight.bold,
                       fontSize: Constants()
                               .responsiveTextStyleFooters(context)
                               .fontSize! -
-                          2,
-                    ),
+                          2),
+                ),
+                CustomMarquee(
+                  text:
+                      '"${currentSong?.track?.name ?? 'Unknown'}" by ${currentSong?.track?.artists?.map((a) => a.name).join(', ') ?? 'Unknown Artist'}',
+                  style: TextStyle(
+                    fontSize: Constants()
+                            .responsiveTextStyleFooters(context)
+                            .fontSize! -
+                        2,
                   ),
-                ],
-              ),
+                ),
+              ],
             ),
-            SizedBox(
-              width:
-                  Constants().responsiveTextStyleFooters(context).fontSize! - 2,
-            ),
-          ],
-        ),
+          ),
+          SizedBox(
+            width:
+                Constants().responsiveTextStyleFooters(context).fontSize! - 2,
+          ),
+        ],
       ),
+    );
+  }
+
+  Widget _buildSmallWidget() {
+    return Stack(
+      alignment: Alignment.center,
+      children: [
+        ClipOval(
+          child: currentSong?.track?.album?.images != null &&
+                  currentSong!.track!.album!.images!.isNotEmpty
+              ? Stack(
+                  alignment: Alignment.bottomCenter,
+                  children: [
+                    Image.network(
+                      currentSong!.track!.album!.images![0].url!,
+                      width: responsiveFontSize(context, 90),
+                      height: responsiveFontSize(context, 90),
+                      fit: BoxFit.cover,
+                    ),
+                    Container(
+                      color: Color.fromARGB(
+                        255,
+                        255 -
+                            Theme.of(context).textTheme.bodyMedium!.color!.red,
+                        255 -
+                            Theme.of(context)
+                                .textTheme
+                                .bodyMedium!
+                                .color!
+                                .green,
+                        255 -
+                            Theme.of(context).textTheme.bodyMedium!.color!.blue,
+                      ).withOpacity(0.5),
+                      margin: const EdgeInsets.only(bottom: 8),
+                      width: responsiveFontSize(context, 90),
+                      height: responsiveFontSize(context, 25),
+                      child: ClipRect(
+                        child: BackdropFilter(
+                          filter: ImageFilter.blur(
+                              sigmaX: 5.0,
+                              sigmaY:
+                                  5.0), // Adjust sigmaX and sigmaY for desired blur intensity
+                          child: Padding(
+                            padding:
+                                const EdgeInsets.symmetric(horizontal: 8.0),
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                CustomMarquee(
+                                  velocity: 30.0,
+                                  text:
+                                      '"${currentSong?.track?.name ?? 'Unknown'}" by ${currentSong?.track?.artists?.map((a) => a.name).join(', ') ?? 'Unknown Artist'}',
+                                  style: TextStyle(
+                                    letterSpacing: 1,
+                                    fontSize: Constants()
+                                            .responsiveTextStyleFooters(context)
+                                            .fontSize! -
+                                        5,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
+                )
+              : Container(
+                  decoration: BoxDecoration(
+                    color: Constants()
+                        .customColors
+                        .mainThemeColor
+                        .greenLime
+                        .withOpacity(0.2),
+                  ),
+                  width: responsiveFontSize(context, 90),
+                  height: responsiveFontSize(context, 90),
+                  child: const Icon(Icons.music_note),
+                ),
+        ),
+        ContinuousSpinWidget(
+          durationPerRotation: const Duration(seconds: 8),
+          child: ArcText(
+            radius: 47,
+            text: 'on repeat • on repeat • on repeat • ',
+            textStyle: Theme.of(context)
+                .textTheme
+                .bodyMedium
+                ?.copyWith(fontSize: 15.4),
+          ),
+        ),
+      ],
     );
   }
 }

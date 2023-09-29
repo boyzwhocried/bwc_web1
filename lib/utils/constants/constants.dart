@@ -17,7 +17,7 @@ class Constants {
 
   String frontPageIntroductionParagraph() {
     String frontPageIntroductionParagraph =
-        '''Hey there! I'm just a Computer Science student from Indonesia who enjoys learing by doing stuff. So, I made this website using Flutter, you know, to learn how to build a responsive website with only Flutter. No, biggie, just trying things out!''';
+        '''Hey there! I'm a Computer Science student from Indonesia who enjoys learing by doing stuff. So, I made this website using Flutter, you know, to learn how to build a responsive website with only Flutter. No, biggie, just trying things out!''';
     return frontPageIntroductionParagraph;
   }
 
