@@ -27,7 +27,7 @@ class SpotifyPlaylistWidgetState extends State<SpotifyPlaylistWidget> {
   final random = Random();
   Items? currentSong; // Store the currently displayed song
 
-  final String url = 'http://localhost:8000';
+  final String url = 'http://localhost:3000';
   final String endpointGetPlaylist = '/get-playlist';
 
   int next(int min, int max) => min + random.nextInt(max - min);
