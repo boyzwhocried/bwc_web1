@@ -1,6 +1,12 @@
 import 'dart:convert';
 import 'dart:math';
 import 'dart:ui';
+
+import 'package:flutter/foundation.dart';
+import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
+import 'package:shared_preferences/shared_preferences.dart';
+
 import 'package:bwc_web1/utils/constants/constants.dart';
 import 'package:bwc_web1/utils/responsive_font_size.dart';
 import 'package:bwc_web1/utils/url_launcher.dart';
@@ -8,10 +14,6 @@ import 'package:bwc_web1/widgets/custom/custom_arc_text_widget.dart';
 import 'package:bwc_web1/widgets/custom/custom_continuous_spinning_widget.dart';
 import 'package:bwc_web1/widgets/custom/custom_marquee.dart';
 import 'package:bwc_web1/widgets/custom/spotify/playlist_from_server/spotify_playlist_model.dart';
-import 'package:flutter/foundation.dart';
-import 'package:http/http.dart' as http;
-import 'package:flutter/material.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 class SpotifyPlaylistWidget extends StatefulWidget {
   final bool isSmall;
@@ -25,12 +27,14 @@ class SpotifyPlaylistWidget extends StatefulWidget {
 
 class SpotifyPlaylistWidgetState extends State<SpotifyPlaylistWidget> {
   List<Items>? playlistItems = [];
-  final random = Random();
   Items? currentSong; // Store the currently displayed song
 
   final String url = 'https://bwc1-server.onrender.com';
   final String endpointGetPlaylist = '/get-playlist';
 
+  final Random random = Random();
+
+  // Function to generate a random number in a range
   int next(int min, int max) => min + random.nextInt(max - min);
 
   @override
@@ -41,17 +45,17 @@ class SpotifyPlaylistWidgetState extends State<SpotifyPlaylistWidget> {
 
   Future<void> fetchData() async {
     try {
-      SharedPreferences prefs = await SharedPreferences.getInstance();
-      final lastFetchTime = prefs.getInt('lastFetchTime') ?? 0;
+      final SharedPreferences prefs = await SharedPreferences.getInstance();
+      final int lastFetchTime = prefs.getInt('lastFetchTime') ?? 0;
 
       // Check if the data was fetched within the last week
-      final currentTime = DateTime.now().millisecondsSinceEpoch;
-      final isDataExpired =
+      final int currentTime = DateTime.now().millisecondsSinceEpoch;
+      final bool isDataExpired =
           currentTime - lastFetchTime > const Duration(days: 7).inMilliseconds;
 
       // Use cached data if available and not expired
       if (!isDataExpired) {
-        final cachedData = prefs.getString('cachedData');
+        final String? cachedData = prefs.getString('cachedData');
         if (cachedData != null) {
           final jsonData = json.decode(cachedData);
           final List<dynamic> items = jsonData['tracks']['items'];
@@ -66,10 +70,11 @@ class SpotifyPlaylistWidgetState extends State<SpotifyPlaylistWidget> {
                 ? playlistItems![next(0, playlistItems!.length)]
                 : null;
           });
-          
+
           return; // Exit the function early since we used cached data
         }
       }
+
       try {
         // Fetch new data from the server
         final response = await http.get(Uri.parse('$url$endpointGetPlaylist'));
@@ -91,8 +96,6 @@ class SpotifyPlaylistWidgetState extends State<SpotifyPlaylistWidget> {
           // Cache the data and timestamp of the last fetch
           prefs.setString('cachedData', response.body);
           prefs.setInt('lastFetchTime', currentTime);
-
-          
         }
       } catch (e) {
         final cachedData = prefs.getString('cachedData');
@@ -110,16 +113,13 @@ class SpotifyPlaylistWidgetState extends State<SpotifyPlaylistWidget> {
                 ? playlistItems![next(0, playlistItems!.length)]
                 : null;
           });
-          
-          // return; // Exit the function early since we used cached data
         }
-        
+
         if (kDebugMode) {
           print('Error fetching data: $e');
         }
       }
     } catch (e) {
-      
       if (kDebugMode) {
         print('Error fetching data: $e');
       }
@@ -136,9 +136,8 @@ class SpotifyPlaylistWidgetState extends State<SpotifyPlaylistWidget> {
               currentSong?.track!.externalUrls!.spotify;
           urlLaunchInBrowser(externalUrls!);
         } catch (e) {
-          
           if (kDebugMode) {
-            print('Error fetching data: $e');
+            print('Error launching URL: $e');
           }
         }
       },
@@ -269,7 +268,7 @@ class SpotifyPlaylistWidgetState extends State<SpotifyPlaylistWidget> {
                       margin: const EdgeInsets.only(bottom: 8),
                       width: responsiveFontSize(context, 90),
                       height: responsiveFontSize(context, 25),
-                      child: ClipRect(
+                      child: ClipRRect(
                         child: BackdropFilter(
                           filter: ImageFilter.blur(
                               sigmaX: 5.0,

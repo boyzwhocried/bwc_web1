@@ -1,15 +1,14 @@
 import 'dart:math' as math;
-
 import 'package:flutter/material.dart';
 
 class ArcText extends StatelessWidget {
   const ArcText({
-    super.key,
+    Key? key, // Use 'Key?' instead of 'super.key'
     required this.radius,
     required this.text,
     this.textStyle,
     this.startAngle = 0,
-  });
+  }) : super(key: key);
 
   final double radius;
   final String text;
@@ -17,20 +16,27 @@ class ArcText extends StatelessWidget {
   final TextStyle? textStyle;
 
   @override
-  Widget build(BuildContext context) => CustomPaint(
-        painter: _Painter(
-          radius,
-          text,
-          textStyle ?? Theme.of(context).textTheme.bodyMedium!,
-          initialAngle: startAngle,
-        ),
-      );
+  Widget build(BuildContext context) {
+    return CustomPaint(
+      painter: _ArcTextPainter(
+        radius: radius,
+        text: text,
+        textStyle: textStyle ?? Theme.of(context).textTheme.bodyMedium!,
+        initialAngle: startAngle,
+      ),
+    );
+  }
 }
 
-class _Painter extends CustomPainter {
-  _Painter(this.radius, this.text, this.textStyle, {this.initialAngle = 0});
+class _ArcTextPainter extends CustomPainter {
+  _ArcTextPainter({
+    required this.radius,
+    required this.text,
+    required this.textStyle,
+    this.initialAngle = 0,
+  });
 
-  final num radius;
+  final double radius;
   final String text;
   final double initialAngle;
   final TextStyle textStyle;

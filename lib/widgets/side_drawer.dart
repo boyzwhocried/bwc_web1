@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 
 class SideDrawer extends StatelessWidget {
+  // Constructor for the SideDrawer widget.
   const SideDrawer({
-    super.key,
+    Key? key,
     required this.updateCallback,
-  });
+  }) : super(key: key);
 
+  // Callback function to update the selected item.
   final Function(int) updateCallback;
 
   @override
@@ -13,6 +15,7 @@ class SideDrawer extends StatelessWidget {
     return Drawer(
       child: Stack(
         children: [
+          // Close button in the top-right corner.
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
             child: Row(
@@ -37,26 +40,28 @@ class SideDrawer extends StatelessWidget {
               SizedBox(
                 child: Column(
                   children: [
+                    // List item for exploring.
                     ListTile(
                       onTap: () {
                         Navigator.pop(context);
                         updateCallback(1);
                       },
                       title: const Text(
-                        'explore',
+                        'Explore',
                         style: TextStyle(fontSize: 24),
                         textAlign: TextAlign.right,
                       ),
                       contentPadding:
                           const EdgeInsets.symmetric(horizontal: 30),
                     ),
+                    // List item for about.
                     ListTile(
                       onTap: () {
                         Navigator.pop(context);
                         updateCallback(2);
                       },
                       title: const Text(
-                        'about',
+                        'About',
                         style: TextStyle(fontSize: 24),
                         textAlign: TextAlign.right,
                       ),

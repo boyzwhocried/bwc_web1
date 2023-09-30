@@ -1,15 +1,15 @@
+import 'package:flutter/material.dart';
 import 'package:bwc_web1/utils/responsive_font_size.dart';
 import 'package:bwc_web1/utils/responsive_padding_size.dart';
 import 'package:bwc_web1/widgets/contents/introduction.dart';
 import 'package:bwc_web1/widgets/custom/custom_animated_fade_in_widget.dart';
 import 'package:bwc_web1/widgets/custom/on_hover_animated_widget.dart';
-import 'package:flutter/material.dart';
 
 class FrontPage extends StatelessWidget {
   const FrontPage({
-    super.key,
+    Key? key,
     required this.updateCallback,
-  });
+  }) : super(key: key);
 
   final Function(int) updateCallback;
 
@@ -28,7 +28,6 @@ class FrontPage extends StatelessWidget {
               ),
               child: ExploreButton(updateCallback: updateCallback),
             ),
-            
           ],
         ),
       ),
@@ -38,9 +37,9 @@ class FrontPage extends StatelessWidget {
 
 class ExploreButton extends StatefulWidget {
   const ExploreButton({
-    super.key,
+    Key? key,
     required this.updateCallback,
-  });
+  }) : super(key: key);
 
   final Function(int p1) updateCallback;
 
@@ -50,11 +49,12 @@ class ExploreButton extends StatefulWidget {
 
 class _ExploreButtonState extends State<ExploreButton> {
   bool _isHovered = false;
+
   @override
   Widget build(BuildContext context) {
     return AnimatedFadeInWidget(
       startDelay: const Duration(milliseconds: 500),
-      child: OnHoverAniamatedWidget(
+      child: OnHoverAnimatedWidget(
         onHoverChange: (isHovered) {
           setState(() {
             _isHovered = isHovered;
@@ -76,7 +76,7 @@ class _ExploreButtonState extends State<ExploreButton> {
                     widget.updateCallback(1);
                   },
                   child: Text(
-                    'go explore',
+                    'Go Explore',
                     style: TextStyle(
                       letterSpacing: 2.0,
                       fontWeight: FontWeight.w600,
@@ -92,7 +92,6 @@ class _ExploreButtonState extends State<ExploreButton> {
                 SizedBox(width: _isHovered ? 20 : 0),
                 Icon(
                   _isHovered ? Icons.arrow_right_alt : Icons.arrow_right,
-                  // : Icons.keyboard_arrow_right,
                   size: responsiveFontSize(context, 32),
                   color: Theme.of(context)
                       .textTheme

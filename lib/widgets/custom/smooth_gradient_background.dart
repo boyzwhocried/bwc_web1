@@ -1,8 +1,6 @@
-// ignore_for_file: library_private_types_in_public_api
-
 import 'dart:async';
 import 'dart:math';
-import 'package:bwc_web1/utils/screen_dimensions.dart';
+
 import 'package:flutter/material.dart';
 
 enum GradientDirectionType {
@@ -19,37 +17,43 @@ class SmoothGradientBackground extends StatefulWidget {
   final Alignment staticGradientEnd;
 
   const SmoothGradientBackground({
-    super.key,
+    Key? key,
     required this.gradients,
     this.duration = const Duration(seconds: 1),
     required this.child,
     this.gradientDirectionType = GradientDirectionType.static,
     this.staticGradientBegin = Alignment.topLeft,
     this.staticGradientEnd = Alignment.bottomRight,
-  });
+  }) : super(key: key);
 
   @override
-  _SmoothGradientBackgroundState createState() =>
-      _SmoothGradientBackgroundState();
+  SmoothGradientBackgroundState createState() =>
+      SmoothGradientBackgroundState();
 }
 
-class _SmoothGradientBackgroundState extends State<SmoothGradientBackground> {
-  int gradientIndex = 0;
-  Alignment currentBegin = Alignment.topLeft;
-  Alignment currentEnd = Alignment.bottomRight;
+class SmoothGradientBackgroundState extends State<SmoothGradientBackground> {
+  late int gradientIndex;
+  late Alignment currentBegin;
+  late Alignment currentEnd;
 
   @override
   void initState() {
     super.initState();
+    // Initialize state variables
+    gradientIndex = 0;
+    currentBegin = Alignment.topLeft;
+    currentEnd = Alignment.bottomRight;
+    // Start the gradient animation
     startGradientAnimation();
-    _startImageChangeTimer();
   }
 
   void startGradientAnimation() {
-    Timer.periodic(widget.duration, (timer) {
+    Timer.periodic(widget.duration, (_) {
       setState(() {
+        // Cycle through gradient colors
         gradientIndex = (gradientIndex + 1) % widget.gradients.length;
         if (widget.gradientDirectionType == GradientDirectionType.dynamic) {
+          // Generate random gradient direction
           generateRandomDirection();
         }
       });
@@ -58,6 +62,7 @@ class _SmoothGradientBackgroundState extends State<SmoothGradientBackground> {
 
   void generateRandomDirection() {
     final random = Random();
+    // Generate random gradient directions
     currentBegin = Alignment(
       random.nextDouble() * 2 - 1,
       random.nextDouble() * 2 - 1,
@@ -66,40 +71,6 @@ class _SmoothGradientBackgroundState extends State<SmoothGradientBackground> {
       random.nextDouble() * 2 - 1,
       random.nextDouble() * 2 - 1,
     );
-  }
-
-  int _currentImageIndex = 0; // Index to keep track of the current image
-
-  // List of image paths that you want to cycle through
-  final List<String> _imagePaths = [
-    'assets/images/textures/grainy_texture0.jpg',
-    'assets/images/textures/grainy_texture1.jpg',
-    'assets/images/textures/grainy_texture2.jpg',
-    'assets/images/textures/grainy_texture3.jpg',
-    // Add more image paths as needed
-  ];
-
-  // Create a timer that triggers the image change every second
-  Timer? _imageChangeTimer;
-
-  @override
-  void dispose() {
-    // Cancel the timer when the widget is disposed to prevent memory leaks
-    _imageChangeTimer?.cancel();
-    super.dispose();
-  }
-
-  void _startImageChangeTimer() {
-    const fps = 24; //Adjust the fps flickering effect
-    const duration =
-        Duration(milliseconds: 1000 ~/ fps); // Change image every second
-
-    _imageChangeTimer = Timer.periodic(duration, (timer) {
-      // Update the current image index, wrapping around to the first image if needed
-      setState(() {
-        _currentImageIndex = (_currentImageIndex + 1) % _imagePaths.length;
-      });
-    });
   }
 
   @override
@@ -115,8 +86,8 @@ class _SmoothGradientBackgroundState extends State<SmoothGradientBackground> {
 
     return AnimatedContainer(
       duration: widget.duration,
-      width: double.infinity, // Set the width to match the screen width
-      height: double.infinity, // Set the height to match the screen height
+      width: double.infinity,
+      height: double.infinity,
       decoration: BoxDecoration(
         gradient: LinearGradient(
           begin: gradientBegin,
@@ -127,27 +98,21 @@ class _SmoothGradientBackgroundState extends State<SmoothGradientBackground> {
           ],
         ),
       ),
-      child: getDeviceType(context) != DeviceType.phone
-          ? Stack(
-              children: [
-                // Add your image texture as a background
-                SizedBox(
-                  width: double
-                      .infinity, // Set the width to match the screen width
-                  height: double
-                      .infinity, // Set the height to match the screen height
-                  child: Image.asset(
-                    // 'assets/images/textures/grainy_texture.jpg',
-                    _imagePaths[_currentImageIndex],
-                    fit: BoxFit.cover,
-                    opacity: const AlwaysStoppedAnimation<double>(0.1),
-                  ),
-                ),
-                // Add your other child widget (content) on top of the image texture
-                widget.child,
-              ],
-            )
-          : widget.child,
+      child: Stack(
+        children: [
+          // Fill the screen with the image texture
+          Positioned.fill(
+            child: Image.asset(
+              'assets/images/textures/tv_noise.gif',
+              scale: 3,
+              opacity: const AlwaysStoppedAnimation(0.1),
+              repeat: ImageRepeat.repeat,
+            ),
+          ),
+          // Add the child widget on top of the image texture
+          widget.child,
+        ],
+      ),
     );
   }
 }

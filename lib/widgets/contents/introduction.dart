@@ -81,7 +81,7 @@ class IntroductionSection extends StatelessWidget {
             animatedWords: [
               AnimatedWord(
                 word: 'Computer Science',
-                colors: ColorGradientText.getColorList(
+                colors: ColorUtils.getColorList(
                   context,
                   Constants().customColors.pastelIridescent,
                 ),
@@ -92,7 +92,7 @@ class IntroductionSection extends StatelessWidget {
               ),
               AnimatedWord(
                 word: 'Flutter,',
-                colors: ColorGradientText.getColorList(
+                colors: ColorUtils.getColorList(
                     context, Constants().customColors.logoColors.flutter),
                 onTap: () {
                   urlLaunchInBrowser('https://flutter.dev/');
@@ -100,7 +100,7 @@ class IntroductionSection extends StatelessWidget {
               ),
               AnimatedWord(
                 word: 'Flutter.',
-                colors: ColorGradientText.getColorList(
+                colors: ColorUtils.getColorList(
                     context, Constants().customColors.logoColors.flutter),
                 onTap: () {
                   urlLaunchInBrowser('https://flutter.dev/');

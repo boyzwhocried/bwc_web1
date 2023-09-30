@@ -8,17 +8,3 @@ Future<void> urlLaunchInBrowser(String url) async {
     throw Exception('Could not launch $url');
   }
 }
-
-void sendEmail(String emailAddress) async {
-  final Uri emailLaunchUri = Uri(
-    scheme: 'mailto',
-    path: emailAddress,
-  );
-
-  if (await canLaunchUrlString(emailLaunchUri.toString())) {
-    await launchUrlString(emailLaunchUri.toString());
-  } else {
-    throw 'Could not launch email';
-  }
-}
-

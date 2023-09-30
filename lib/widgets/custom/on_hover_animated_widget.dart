@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-class OnHoverAniamatedWidget extends StatefulWidget {
+class OnHoverAnimatedWidget extends StatefulWidget {
   final Widget child;
   final Duration animationDuration;
   final EdgeInsetsGeometry paddingOnHover;
@@ -10,11 +10,10 @@ class OnHoverAniamatedWidget extends StatefulWidget {
   final Curve animationCurve;
   final double? width;
   final double? height;
-  final Function(bool isHovered)?
-      onHoverChange; // New property for onHoverChange callback
+  final Function(bool isHovered)? onHoverChange;
 
-  const OnHoverAniamatedWidget({
-    super.key,
+  const OnHoverAnimatedWidget({
+    Key? key,
     required this.child,
     this.animationDuration = const Duration(milliseconds: 200),
     this.paddingOnHover = const EdgeInsets.all(0),
@@ -24,14 +23,14 @@ class OnHoverAniamatedWidget extends StatefulWidget {
     this.animationCurve = Curves.easeInOut,
     this.width,
     this.height,
-    this.onHoverChange, // New onHoverChange callback
-  });
+    this.onHoverChange,
+  }) : super(key: key);
 
   @override
-  OnHoverAniamatedWidgetState createState() => OnHoverAniamatedWidgetState();
+  OnHoverAnimatedWidgetState createState() => OnHoverAnimatedWidgetState();
 }
 
-class OnHoverAniamatedWidgetState extends State<OnHoverAniamatedWidget>
+class OnHoverAnimatedWidgetState extends State<OnHoverAnimatedWidget>
     with SingleTickerProviderStateMixin {
   late AnimationController _animationController;
   late Animation<EdgeInsetsGeometry> _paddingAnimation;
@@ -84,16 +83,14 @@ class OnHoverAniamatedWidgetState extends State<OnHoverAniamatedWidget>
         setState(() {
           _isHovered = true;
           _animationController.forward();
-          widget.onHoverChange
-              ?.call(_isHovered); // Call the onHoverChange callback
+          _callOnHoverChange();
         });
       },
       onExit: (_) {
         setState(() {
           _isHovered = false;
           _animationController.reverse();
-          widget.onHoverChange
-              ?.call(_isHovered); // Call the onHoverChange callback
+          _callOnHoverChange();
         });
       },
       child: Transform.scale(
@@ -109,6 +106,12 @@ class OnHoverAniamatedWidgetState extends State<OnHoverAniamatedWidget>
         ),
       ),
     );
+  }
+
+  void _callOnHoverChange() {
+    if (widget.onHoverChange != null) {
+      widget.onHoverChange!(_isHovered);
+    }
   }
 
   @override

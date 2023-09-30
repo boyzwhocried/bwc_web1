@@ -6,6 +6,6 @@ double responsivePaddingSize(
   double rawPaddingSizePercentage,
 ) {
   double screenWidth = getScreenWidth(context);
-  double paddingSizePercentage = (rawPaddingSizePercentage / 100) * screenWidth;
-  return paddingSizePercentage;
+  double paddingSize = (rawPaddingSizePercentage / 100) * screenWidth;
+  return paddingSize;
 }

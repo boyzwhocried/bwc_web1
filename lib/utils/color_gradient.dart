@@ -1,9 +1,10 @@
-import 'package:bwc_web1/provider/dark_mode_provider.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 
-class PastelIridescent {
-  static List<Color> withAlpha({double opacity = 1}) {
+class ColorUtils {
+  // Define a class for color-related utilities
+
+  // PastelIridescent colors with alpha
+  static List<Color> pastelIridescentWithAlpha({double opacity = 1}) {
     return [
       const Color.fromARGB(255, 255, 195, 195).withOpacity(opacity),
       const Color.fromARGB(255, 251, 255, 195).withOpacity(opacity),
@@ -14,38 +15,28 @@ class PastelIridescent {
       const Color.fromARGB(255, 245, 195, 255).withOpacity(opacity),
     ];
   }
-}
 
-class ColorGradientText {
+  // Get a list of colors for gradient text
   static List<Color> getColorList(BuildContext context, List<Color> colors,
       {double opacity = 1}) {
-    final themeData = Provider.of<DarkModeProvider>(context).isDarkMode
-        ? ThemeData.dark()
-        : ThemeData.light();
+    final themeData = Theme.of(context);
 
     return [
-      themeData.textTheme.bodyMedium!.color!.withOpacity(opacity),
-      ...colors,
       themeData.textTheme.bodyLarge!.color!.withOpacity(opacity),
+      ...colors,
+      themeData.textTheme.bodyMedium!.color!.withOpacity(opacity),
     ];
   }
-}
 
-class ColorGradientGenerator {
-  static List<Color> withMainColor({
+  // Generate a list of colors based on a main color and other parameters
+  static List<Color> generateColorGradient({
     double opacity = 1,
     required Color mainColor,
     int amount = 7,
-
-    // The color hue spectrum that will be use in degree (360 = full spectrum)
     double hueDegree = 360.0,
   }) {
     final List<Color> colorList = [];
-
-    // Convert the mainColor to HSLColor
     final HSLColor mainHSLColor = HSLColor.fromColor(mainColor);
-
-    // Calculate the hue difference between each color
     final double hueDifference = hueDegree / amount;
 
     for (int i = 0; i < amount; i++) {
@@ -60,8 +51,8 @@ class ColorGradientGenerator {
       colorList.add(generatedColor);
     }
 
-    // Duplicate the list and remove the last color to avoid repetition when looping
-    List<Color> duplicatedList = List.from(colorList);
+    // Create a looped gradient by duplicating and reversing the list
+    final List<Color> duplicatedList = List.from(colorList);
     duplicatedList.removeLast();
     colorList.addAll(duplicatedList.reversed);
 

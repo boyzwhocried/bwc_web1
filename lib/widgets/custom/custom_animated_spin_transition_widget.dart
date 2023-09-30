@@ -1,4 +1,4 @@
-// ignore_for_file: library_private_types_in_public_api
+import 'dart:math';
 
 import 'package:flutter/material.dart';
 
@@ -17,7 +17,7 @@ class AnimatedSpinTransitionWidget extends StatefulWidget {
   final Duration delayDuration;
 
   const AnimatedSpinTransitionWidget({
-    super.key,
+    Key? key,
     required this.child,
     this.infiniteSpin = true,
     this.spinCount = 1,
@@ -28,13 +28,15 @@ class AnimatedSpinTransitionWidget extends StatefulWidget {
     this.spinCurve = Curves.easeInOut,
     this.delayedStart = false,
     this.delayDuration = const Duration(seconds: 0),
-  });
+  }) : super(key: key);
 
   @override
-  _AnimatedSpinTransitionWidgetState createState() => _AnimatedSpinTransitionWidgetState();
+  AnimatedSpinTransitionWidgetState createState() =>
+      AnimatedSpinTransitionWidgetState();
 }
 
-class _AnimatedSpinTransitionWidgetState extends State<AnimatedSpinTransitionWidget>
+class AnimatedSpinTransitionWidgetState
+    extends State<AnimatedSpinTransitionWidget>
     with SingleTickerProviderStateMixin {
   late AnimationController _controller;
   late Animation<double> _animation;
@@ -51,6 +53,7 @@ class _AnimatedSpinTransitionWidgetState extends State<AnimatedSpinTransitionWid
     double begin = widget.startRotationDegree;
     double end = widget.endRotationDegree;
 
+    // Swap rotation values for counterclockwise direction
     if (widget.spinDirection == SpinDirection.counterclockwise) {
       double temp = begin;
       begin = end;
@@ -94,38 +97,10 @@ class _AnimatedSpinTransitionWidgetState extends State<AnimatedSpinTransitionWid
       child: widget.child,
       builder: (context, child) {
         return Transform.rotate(
-          angle: _animation.value *
-              (3.14159265358979323846 / 180), // Convert to radians
+          angle: _animation.value * (pi / 180), // Convert to radians
           child: child,
         );
       },
     );
   }
-}
-
-void usageExample() {
-  runApp(MaterialApp(
-    home: Scaffold(
-      appBar: AppBar(
-        title: const Text('Spinning Widget Example'),
-      ),
-      body: Center(
-        child: AnimatedSpinTransitionWidget(
-          infiniteSpin: true,
-          spinDirection: SpinDirection.clockwise,
-          startRotationDegree: 0.0,
-          endRotationDegree: 360.0,
-          spinDuration: const Duration(seconds: 1),
-          spinCurve: Curves.easeInOut,
-          delayedStart: true,
-          delayDuration: const Duration(seconds: 2),
-          child: Container(
-            width: 100,
-            height: 100,
-            color: Colors.blue,
-          ),
-        ),
-      ),
-    ),
-  ));
 }

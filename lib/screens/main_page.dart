@@ -1,22 +1,20 @@
+import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:bwc_web1/provider/dark_mode_provider.dart';
 import 'package:bwc_web1/screens/about_page.dart';
 import 'package:bwc_web1/screens/front_page.dart';
 import 'package:bwc_web1/utils/constants/constants.dart';
-
 import 'package:bwc_web1/utils/responsive_font_size.dart';
 import 'package:bwc_web1/utils/responsive_padding_size.dart';
+import 'package:bwc_web1/utils/screen_dimensions.dart';
 import 'package:bwc_web1/widgets/contents/introduction.dart';
-import 'package:bwc_web1/widgets/custom/custom_animated_fade_in_text.dart';
 import 'package:bwc_web1/widgets/custom/custom_animated_fade_in_widget.dart';
 import 'package:bwc_web1/widgets/custom/smooth_gradient_background.dart';
-import 'package:bwc_web1/utils/screen_dimensions.dart';
 import 'package:bwc_web1/widgets/dark_mode_toggle_button.dart';
 import 'package:bwc_web1/widgets/side_drawer.dart';
-import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 
 class MainPage extends StatefulWidget {
-  const MainPage({super.key});
+  const MainPage({Key? key}) : super(key: key);
 
   @override
   State<MainPage> createState() => _MainPageState();
@@ -30,8 +28,9 @@ class _MainPageState extends State<MainPage>
   void initState() {
     super.initState();
     _tabController = TabController(
-        length: 3,
-        vsync: this); // Replace '3' with the number of actions you have
+      length: 3, // Replace with the actual number of tabs
+      vsync: this,
+    );
   }
 
   @override
@@ -40,19 +39,16 @@ class _MainPageState extends State<MainPage>
     super.dispose();
   }
 
-  // Switching between page funtion with controller
+  // Function to switch between pages using the TabController
   void switchPage(int pageNumber) {
-    _tabController.animateTo(
-        pageNumber); // Replace '0' with the index of the action you want to show
-    setState(() {});
+    _tabController.animateTo(pageNumber);
   }
 
   @override
   Widget build(BuildContext context) {
     final darkModeProvider = Provider.of<DarkModeProvider>(context);
-
-    DeviceType deviceType = getDeviceType(context);
-    double screenWidth = getScreenWidth(context);
+    final deviceType = getDeviceType(context);
+    final screenWidth = getScreenWidth(context);
 
     return Scaffold(
       appBar: AppBar(
@@ -62,25 +58,28 @@ class _MainPageState extends State<MainPage>
             Theme.of(context).colorScheme.inversePrimary.withOpacity(0.5),
         title: Padding(
           padding: EdgeInsets.only(
-              left: deviceType != DeviceType.phone
-                  ? responsivePaddingSize(
-                      context, 10) // 10 percent of the screen width
-                  : 0),
+            left: deviceType != DeviceType.phone
+                ? responsivePaddingSize(
+                    context, 10) // 10 percent of the screen width
+                : 0,
+          ),
           child: GestureDetector(
             onTap: () {
               switchPage(0);
             },
-            child: AnimatedFadeInText(
-              text: 'boyzwhocried',
-              textStyle: TextStyle(
-                letterSpacing: 2.0,
-                fontWeight: FontWeight.w600,
-                fontSize: responsiveFontSize(context, 20),
-              ),
+            child: AnimatedFadeInWidget(
               slideDirection: deviceType == DeviceType.phone
-                  ? TextSlideDirection.topToBottom
-                  : TextSlideDirection.leftToRight,
+                  ? SlideDirection.topToBottom
+                  : SlideDirection.leftToRight,
               curveType: Curves.easeInOutCubic,
+              child: Text(
+                'boyzwhocried',
+                style: TextStyle(
+                  letterSpacing: 2.0,
+                  fontWeight: FontWeight.w600,
+                  fontSize: responsiveFontSize(context, 20),
+                ),
+              ),
             ),
           ),
         ),
@@ -157,7 +156,7 @@ class _MainPageState extends State<MainPage>
               },
             ), // Front Page
             const IntroductionSection(), // Explore page
-            const AboutPage(), // Aabout page
+            const AboutPage(), // About page
           ],
         ),
       ),

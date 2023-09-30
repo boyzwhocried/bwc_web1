@@ -1,6 +1,5 @@
+import 'package:bwc_web1/widgets/custom/on_hover_animated_text.dart';
 import 'package:flutter/material.dart';
-
-import 'on_hover_animated_text.dart';
 
 class AnimatedWordsInParagraph extends StatelessWidget {
   final String paragraph;
@@ -8,25 +7,25 @@ class AnimatedWordsInParagraph extends StatelessWidget {
   final TextStyle textStyle;
 
   const AnimatedWordsInParagraph({
-    super.key,
+    Key? key,
     required this.paragraph,
     required this.animatedWords,
     required this.textStyle,
-  });
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return RichText(
       text: TextSpan(
         style: textStyle,
-        children: _buildTextSpans(context),
+        children: _buildTextSpans(),
       ),
     );
   }
 
-  List<TextSpan> _buildTextSpans(BuildContext context) {
-    List<TextSpan> textSpans = [];
-    final words = paragraph.split(' ');
+  List<TextSpan> _buildTextSpans() {
+    final List<TextSpan> textSpans = [];
+    final List<String> words = paragraph.split(' ');
 
     int currentIndex = 0;
     while (currentIndex < words.length) {
@@ -42,8 +41,8 @@ class AnimatedWordsInParagraph extends StatelessWidget {
       }
 
       if (isAnimated && animatedWord != null) {
-        final word = animatedWord.word;
-        final wordLength = word.split(' ').length;
+        final String word = animatedWord.word;
+        final int wordLength = word.split(' ').length;
 
         textSpans.add(
           TextSpan(
