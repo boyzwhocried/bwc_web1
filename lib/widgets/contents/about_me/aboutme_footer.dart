@@ -64,14 +64,17 @@ class ContactInfoWidget extends StatelessWidget {
   Widget _buildContactText(ContactItem item, BuildContext context) {
     return OnHoverAnimatedWidget(
       scaleOnHover: 1.05,
-      child: OnHoverAnimatedText(
-        speed: const Duration(milliseconds: 500),
-        text: item.text,
+      child: GestureDetector(
         onTap: () {
           urlLaunchInBrowser(item.url);
         },
-        fontStyle: Constants().responsiveTextStyleFooters(context),
-        colors: ColorUtils.getColorList(context, item.colors),
+        child: OnHoverAnimatedText(
+          speed: const Duration(milliseconds: 500),
+          text: item.text,
+          onTap: () {},
+          fontStyle: Constants().responsiveTextStyleFooters(context),
+          colors: ColorUtils.getColorList(context, item.colors),
+        ),
       ),
     );
   }
