@@ -8,6 +8,7 @@ import 'package:bwc_web1/widgets/custom/custom_arc_text_widget.dart';
 import 'package:bwc_web1/widgets/custom/custom_continuous_spinning_widget.dart';
 import 'package:bwc_web1/widgets/custom/custom_marquee.dart';
 import 'package:bwc_web1/widgets/custom/spotify/playlist_from_server/spotify_playlist_model.dart';
+import 'package:flutter/foundation.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -27,7 +28,7 @@ class SpotifyPlaylistWidgetState extends State<SpotifyPlaylistWidget> {
   final random = Random();
   Items? currentSong; // Store the currently displayed song
 
-  final String url = 'http://localhost:3000';
+  final String url = 'https://bwc1-server.onrender.com';
   final String endpointGetPlaylist = '/get-playlist';
 
   int next(int min, int max) => min + random.nextInt(max - min);
@@ -65,8 +66,7 @@ class SpotifyPlaylistWidgetState extends State<SpotifyPlaylistWidget> {
                 ? playlistItems![next(0, playlistItems!.length)]
                 : null;
           });
-          // ignore: avoid_print
-          print('Data is not expired');
+          
           return; // Exit the function early since we used cached data
         }
       }
@@ -92,8 +92,7 @@ class SpotifyPlaylistWidgetState extends State<SpotifyPlaylistWidget> {
           prefs.setString('cachedData', response.body);
           prefs.setInt('lastFetchTime', currentTime);
 
-          // ignore: avoid_print
-          print('Success fetching data: ${response.body}');
+          
         }
       } catch (e) {
         final cachedData = prefs.getString('cachedData');
@@ -111,16 +110,19 @@ class SpotifyPlaylistWidgetState extends State<SpotifyPlaylistWidget> {
                 ? playlistItems![next(0, playlistItems!.length)]
                 : null;
           });
-          // ignore: avoid_print
-          print('Use cached data instead');
+          
           // return; // Exit the function early since we used cached data
         }
-        // ignore: avoid_print
-        print('Error fetching data: $e');
+        
+        if (kDebugMode) {
+          print('Error fetching data: $e');
+        }
       }
     } catch (e) {
-      // ignore: avoid_print
-      print('Error fetching data: $e');
+      
+      if (kDebugMode) {
+        print('Error fetching data: $e');
+      }
     }
   }
 
@@ -134,8 +136,10 @@ class SpotifyPlaylistWidgetState extends State<SpotifyPlaylistWidget> {
               currentSong?.track!.externalUrls!.spotify;
           urlLaunchInBrowser(externalUrls!);
         } catch (e) {
-          // ignore: avoid_print
-          print('Error fetching data: $e');
+          
+          if (kDebugMode) {
+            print('Error fetching data: $e');
+          }
         }
       },
       icon: widget.isSmall ? _buildSmallWidget() : _buildRegularWidget(),

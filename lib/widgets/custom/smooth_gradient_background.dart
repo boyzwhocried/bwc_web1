@@ -2,6 +2,7 @@
 
 import 'dart:async';
 import 'dart:math';
+import 'package:bwc_web1/utils/screen_dimensions.dart';
 import 'package:flutter/material.dart';
 
 enum GradientDirectionType {
@@ -126,24 +127,27 @@ class _SmoothGradientBackgroundState extends State<SmoothGradientBackground> {
           ],
         ),
       ),
-      child: Stack(
-        children: [
-          // Add your image texture as a background
-          SizedBox(
-            width: double.infinity, // Set the width to match the screen width
-            height:
-                double.infinity, // Set the height to match the screen height
-            child: Image.asset(
-              // 'assets/images/textures/grainy_texture.jpg',
-              _imagePaths[_currentImageIndex],
-              fit: BoxFit.cover,
-              opacity: const AlwaysStoppedAnimation<double>(0.1),
-            ),
-          ),
-          // Add your other child widget (content) on top of the image texture
-          widget.child,
-        ],
-      ),
+      child: getDeviceType(context) != DeviceType.phone
+          ? Stack(
+              children: [
+                // Add your image texture as a background
+                SizedBox(
+                  width: double
+                      .infinity, // Set the width to match the screen width
+                  height: double
+                      .infinity, // Set the height to match the screen height
+                  child: Image.asset(
+                    // 'assets/images/textures/grainy_texture.jpg',
+                    _imagePaths[_currentImageIndex],
+                    fit: BoxFit.cover,
+                    opacity: const AlwaysStoppedAnimation<double>(0.1),
+                  ),
+                ),
+                // Add your other child widget (content) on top of the image texture
+                widget.child,
+              ],
+            )
+          : widget.child,
     );
   }
 }
