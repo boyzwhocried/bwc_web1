@@ -37,7 +37,7 @@ class AboutMeSection2 extends StatelessWidget {
               children: [
                 // Animated words in paragraph
                 AnimatedWordsInParagraph(
-                  paragraph: Constants().aboutMeSection2Paragraph(),
+                  paragraph: Constants().aboutMeSection21Paragraph(),
                   animatedWords: [
                     AnimatedWord(
                       word: 'Manufacturing Polytechnic Bandung,',
@@ -51,6 +51,13 @@ class AboutMeSection2 extends StatelessWidget {
                         urlLaunchInBrowser('https://polman-bandung.ac.id/');
                       },
                     ),
+                  ],
+                  textStyle: Constants().responsiveTextStyleContent(context),
+                ),
+                // Animated words in paragraph
+                AnimatedWordsInParagraph(
+                  paragraph: Constants().aboutMeSection22Paragraph(),
+                  animatedWords: [
                     AnimatedWord(
                       word: 'Binus University.',
                       colors: ColorUtils.getColorList(
@@ -64,6 +71,10 @@ class AboutMeSection2 extends StatelessWidget {
                     ),
                   ],
                   textStyle: Constants().responsiveTextStyleContent(context),
+                ),
+                Text(
+                  Constants().aboutMeSection23Paragraph(),
+                  style: Constants().responsiveTextStyleContent(context),
                 ),
               ],
             ),

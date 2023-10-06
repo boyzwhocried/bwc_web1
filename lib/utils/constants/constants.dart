@@ -27,13 +27,19 @@ class Constants {
     return '''Hello, I'm Verrel (known as "boyzwhocried" online), a recent Computer Science graduate. I have a growing interest in arts and technology, and I'm excited to combine them. I love hands-on learning and creativity, and I'm looking forward to starting this website project. While it's a small beginning for me, I aim to create digital experiences that people will love as I begin my journey in this field.''';
   }
 
-  // About me section - paragraph 2
-  String aboutMeSection2Paragraph() {
-    return '''My journey started with an Associate Degree in Mechatronics from Manufacturing Polytechnic Bandung, where I learned to craft seamless interactions between hardware and software components. My final project was a 3D Engraving Machine using Visual Basic .NET.
+  // About me section - paragraph 21
+  String aboutMeSection21Paragraph() {
+    return 'My journey started with an Associate Degree in Mechatronics from Manufacturing Polytechnic Bandung, where I learned to craft seamless interactions between hardware and software components. My final project was a 3D Engraving Machine using Visual Basic .NET.\n';
+  }
 
-    I then pursued a Bachelor's Degree in Computer Science at Binus University, diving into micro frontend concepts and creating user-friendly experiences using React.js to build a human resource app for a company's task management.
+  // About me section - paragraph 22
+  String aboutMeSection22Paragraph() {
+    return 'I then pursued a Bachelor\'s Degree in Computer Science at Binus University, diving into micro frontend concepts and creating user-friendly experiences using React.js to build a human resource app for a company\'s task management.\n';
+  }
 
-    I've also completed various courses and certifications in Flutter, Dart, Strategic Management, Statistics, Probability, and English.''';
+  // About me section - paragraph 23
+  String aboutMeSection23Paragraph() {
+    return 'I\'ve also completed various courses and certifications in Flutter, Dart, Strategic Management, Statistics, Probability, and English.';
   }
 
   // Create a responsive text style for content
